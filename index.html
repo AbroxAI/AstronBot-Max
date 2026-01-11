@@ -22,15 +22,25 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial
 .wrap{ min-height:100vh; display:flex; align-items:center; justify-content:center; padding:18px; }
 .card{ width:100%; max-width:var(--max-width); border-radius:14px; overflow:visible; position:relative; background:linear-gradient(180deg, rgba(1,6,10,0.9), rgba(2,8,12,0.98)); border:1px solid var(--glass); box-shadow:0 18px 60px rgba(0,0,0,0.75); }
 
-header{ display:flex; justify-content:space-between; align-items:center; padding:12px 18px; z-index:60; position:relative; background:linear-gradient(180deg, rgba(2,6,10,0.85), rgba(2,6,10,0.5)); }
+header{ display:flex; justify-content:space-between; align-items:center; padding:14px 18px 40px; z-index:60; position:relative; background:linear-gradient(180deg, rgba(2,6,10,0.85), rgba(2,6,10,0.5)); }
 .left-header{display:flex; align-items:center; gap:12px; min-width:0;}
 .logo-mark{width:38px;height:38px; background:linear-gradient(180deg,var(--neon-green),var(--neon-green-2)); clip-path:polygon(50% 0%,100% 100%,0% 100%); box-shadow:0 0 18px rgba(0,255,51,0.95);}
 .brand{display:flex;flex-direction:column;min-width:0;}
 .brand-top{display:flex;align-items:center;gap:12px}
 .brand-text{ font-family:Orbitron, sans-serif; color:var(--neon-green); font-weight:900; font-size:clamp(20px,5.1vw,48px); letter-spacing:1px; text-transform:uppercase; text-shadow:0 0 10px rgba(0,255,51,0.85),0 12px 36px rgba(0,0,0,0.6); }
-.subtitle{font-size:11px;color:var(--muted);letter-spacing:1.6px;margin-left:2px}
+.subtitle{
+  font-family:Orbitron, sans-serif;
+  font-size:12px;
+  color:var(--neon-green);
+  letter-spacing:2px;
+  margin-left:2px;
+  font-weight:800;
+  text-transform:uppercase;
+  text-shadow:0 0 10px rgba(0,255,51,0.18);
+}
 
-.controls { display:flex; gap:12px; align-items:center; z-index:70; }
+/* Controls placed clearly under the brand so nothing overlaps */
+.controls { display:flex; gap:12px; align-items:center; z-index:70; position:absolute; top:120px; right:18px; pointer-events:auto; }
 
 .select{ background:linear-gradient(180deg,#132733,#0e1a28); padding:8px 12px; border-radius:10px; border:1px solid var(--glass); min-width:110px; color:#e8fbff; cursor:pointer; -webkit-tap-highlight-color: transparent; }
 .select .label{font-size:11px;color:var(--muted); display:block}
@@ -50,23 +60,40 @@ main{position:relative; padding:14px 18px;}
 /* center column above background */
 .center{ position:relative; z-index:12; display:flex; align-items:center; flex-direction:column; gap:18px; padding:32px 10px; }
 
-.triangle-area{ width:100%; max-width:680px; height:410px; display:flex; align-items:center; justify-content:center; position:relative; }
+.triangle-area{ width:100%; max-width:680px; height:430px; display:flex; align-items:center; justify-content:center; position:relative; }
 
 /* Triangles */
 .up-tri, .down-tri { position:absolute; left:50%; transform-origin:center; transition: transform .45s cubic-bezier(.22,.98,.33,1), opacity .25s ease; }
-.up-tri{ top:14%; transform:translateX(-50%) scale(0.98); z-index:8; }
-.down-tri{ top:36%; transform:translateX(-50%) scale(1); z-index:10; }
+.up-tri{ top:18%; transform:translateX(-50%) scale(0.98); z-index:8; }
+.down-tri{ top:42%; transform:translateX(-50%) scale(1); z-index:10; }
 
-svg text{ font-family:Orbitron, monospace; font-weight:900; fill:#fff; paint-order:stroke fill; }
+/* SVG text styling to match screenshot (stroke + subtle drop shadow + tighter type) */
+svg text{
+  font-family:Orbitron, monospace;
+  font-weight:900;
+  fill:#ffffff;
+  paint-order:stroke fill;
+  stroke: rgba(0,0,0,0.65);
+  stroke-width:2px;
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,0.55));
+  dominant-baseline:middle;
+  letter-spacing:0.6px;
+}
 
+/* translucent panels behind numbers handled inline in SVG */
+
+/* connector etc */
 .connector { position:absolute; top:50%; left:50%; transform:translate(-50%,-2px); width:36%; height:6px; border-radius:6px; z-index:6; background:linear-gradient(90deg, rgba(0,255,51,0.12), rgba(255,255,255,0.03), rgba(227,59,59,0.06)); box-shadow:0 10px 30px rgba(0,0,0,0.6); }
 
 .down-glow{ position:absolute; width:86px;height:46px;border-radius:50%; background:radial-gradient(circle at center, rgba(0,255,51,0.98) 0%, rgba(0,255,51,0.28) 25%, rgba(0,0,0,0) 65%); bottom:22%; left:50%; transform:translateX(-50%); filter:blur(6px); z-index:7; }
 
-.rec-badge{ position:absolute; left:18px; bottom:22px; z-index:14; background:linear-gradient(180deg, rgba(3,6,10,0.72), rgba(7,9,12,0.6)); padding:8px 14px; border-radius:999px; border:1px solid rgba(255,255,255,0.04); display:flex; gap:8px; align-items:center; }
+.rec-badge{ position:absolute; left:22px; bottom:26px; z-index:14; background:linear-gradient(180deg, rgba(3,6,10,0.72), rgba(7,9,12,0.6)); padding:8px 14px; border-radius:999px; border:1px solid rgba(255,255,255,0.04); display:flex; gap:8px; align-items:center; }
+.rec-badge .rec{ padding:8px 12px; border-radius:8px; font-weight:900; text-transform:uppercase; font-family:Orbitron, sans-serif; color:var(--neon-green); background:transparent; cursor:pointer; transition:transform .12s ease, box-shadow .12s ease; }
+.rec-badge .rec.clickable{ background:linear-gradient(180deg,var(--neon-green-2),var(--neon-green)); color:#071012; box-shadow:0 10px 30px rgba(0,255,51,0.18); }
+.rec-badge .rec:active{ transform:translateY(1px) }
+.rec-badge .small{ font-size:12px; color:var(--muted); }
 
-.meta{ color:var(--muted); font-size:13px }
-
+/* pills */
 .pills{ margin-top:8px; display:flex; flex-direction:column; gap:12px; align-items:center; z-index:14; }
 .pill{ width:220px; padding:12px; border-radius:999px; font-weight:800; font-size:13px; text-transform:uppercase; cursor:pointer; border:1px solid rgba(255,255,255,0.04); box-shadow:0 10px 30px rgba(0,0,0,0.5); }
 .pill.green{ background:linear-gradient(180deg,var(--neon-green-2),var(--neon-green)); color:#071012; }
@@ -82,12 +109,18 @@ svg text{ font-family:Orbitron, monospace; font-weight:900; fill:#fff; paint-ord
 .btn.ghost{ background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.04); }
 .btn.primary{ background:linear-gradient(180deg,var(--neon-green-2),var(--neon-green)); color:#071012; }
 
+/* support modal specific */
+.support-strong{ font-weight:800; color:#fff; font-size:15px; margin-bottom:8px; }
+.support-contact{ display:flex; gap:12px; align-items:center; margin-top:12px; }
+
 /* responsive full-bleed on small screens */
 @media (max-width:760px){
   .wrap{ padding:0; }
   .card{ border-radius:0; max-width:100%; min-height:100vh; box-shadow:none; }
-  header{ padding:14px; }
-  .main-inner{ min-height:calc(100vh - 120px); }
+  header{ padding:14px 14px 58px; }
+  .main-inner{ min-height:calc(100vh - 140px); }
+  .controls{ right:12px; top:140px; }
+  .triangle-area{ height:360px; }
 }
 
 /* spinner */
@@ -135,7 +168,7 @@ svg text{ font-family:Orbitron, monospace; font-weight:900; fill:#fff; paint-ord
             <div id="b3" class="bokeh" style="width:140px;height:140px;background:radial-gradient(circle at center, rgba(0,255,51,0.95), rgba(0,255,51,0.12)); left:40%; bottom:18%; opacity:0.28;"></div>
           </div>
 
-          <!-- dropdowns container -->
+          <!-- dropdowns container (we position dropdowns under the control at open time) -->
           <div id="dropdowns" style="position:absolute; top:84px; right:22px; z-index:200;"></div>
 
           <div class="center">
@@ -144,9 +177,17 @@ svg text{ font-family:Orbitron, monospace; font-weight:900; fill:#fff; paint-ord
                 <svg viewBox="0 0 100 100" width="180" height="180" aria-hidden="true">
                   <defs>
                     <filter id="gA" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+
+                    <!-- subtle gradient for the number panel background -->
+                    <linearGradient id="upPanel" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" stop-color="rgba(255,255,255,0.06)" />
+                      <stop offset="100%" stop-color="rgba(0,0,0,0.18)" />
+                    </linearGradient>
                   </defs>
                   <polygon id="upPoly" points="50,6 95,86 5,86" fill="#00d64a" filter="url(#gA)"></polygon>
-                  <text id="upText" x="50" y="62" text-anchor="middle" font-size="18" fill="#fff" style="font-family:Orbitron, sans-serif; pointer-events:none"></text>
+                  <!-- translucent rounded panel behind text -->
+                  <rect x="18" y="40" width="64" height="26" rx="8" fill="url(#upPanel)"></rect>
+                  <text id="upText" x="50" y="53" text-anchor="middle" font-size="18" fill="#fff" style="font-family:Orbitron, sans-serif; pointer-events:none"></text>
                 </svg>
               </div>
 
@@ -156,15 +197,25 @@ svg text{ font-family:Orbitron, monospace; font-weight:900; fill:#fff; paint-ord
                 <svg viewBox="0 0 100 100" width="260" height="260" aria-hidden="true">
                   <defs>
                     <filter id="gB" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+
+                    <linearGradient id="downPanel" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" stop-color="rgba(255,255,255,0.06)" />
+                      <stop offset="100%" stop-color="rgba(0,0,0,0.22)" />
+                    </linearGradient>
                   </defs>
                   <polygon id="downPoly" points="50,95 95,15 5,15" fill="#ef4444" filter="url(#gB)"></polygon>
-                  <text id="downText" x="50" y="56" text-anchor="middle" font-size="22" fill="#fff" style="font-family:Orbitron, sans-serif; pointer-events:none"></text>
+                  <!-- translucent rounded panel behind text -->
+                  <rect x="18" y="42" width="64" height="30" rx="8" fill="url(#downPanel)"></rect>
+                  <text id="downText" x="50" y="56" text-anchor="middle" font-size="24" fill="#fff" style="font-family:Orbitron, sans-serif; pointer-events:none"></text>
                 </svg>
               </div>
 
               <div class="down-glow" aria-hidden="true"></div>
 
-              <div class="rec-badge" id="recBadge" aria-hidden="false"><div class="rec" id="rec">LOCKED</div><div class="small" id="recSmall">Subscribe to unlock</div></div>
+              <div class="rec-badge" id="recBadge" aria-hidden="false">
+                <div class="rec" id="rec">START</div>
+                <div class="small" id="recSmall">Contact support to activate</div>
+              </div>
             </div>
 
             <div class="meta">Percentages estimated by the model — window: <span id="metaTF">M1</span> — <span id="metaTs">Last update: —</span></div>
@@ -173,6 +224,8 @@ svg text{ font-family:Orbitron, monospace; font-weight:900; fill:#fff; paint-ord
               <div class="pill green" id="btnReport">OPEN REPORT</div>
               <div class="pill green" id="btnBroker">CHANGE BROKER</div>
               <div class="pill green" id="btnDownload">DOWNLOAD SHEET</div>
+              <!-- TELEGRAM SUPPORT / BALANCE CONTACT button -->
+              <div class="pill green" id="btnTelegram">TELEGRAM SUPPORT</div>
               <div class="pill orange" id="btnLogout">LOGOUT</div>
             </div>
           </div>
@@ -196,8 +249,28 @@ svg text{ font-family:Orbitron, monospace; font-weight:900; fill:#fff; paint-ord
     </div>
   </div>
 
+  <!-- SUPPORT modal shown when user clicks START/locked -->
+  <div id="supportModal" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal-backdrop">
+      <div class="modal" role="document">
+        <h2>Activation required — Contact Support</h2>
+        <p class="support-strong">To start the live signal you must activate your account. Our team verifies each activation to protect model integrity and ensure high-quality signals.</p>
+        <p style="color:var(--muted)">Contact our support team and they will guide you through activation quickly. Activation unlocks the START signal, detailed percentages and premium features with priority assistance.</p>
+
+        <div class="support-contact">
+          <a class="btn primary" id="contactSupport" href="mailto:support@astronbot.max?subject=Activation%20Request%20(ASTRONBOT.MAX)">Contact Support</a>
+          <!-- telegram link in modal (will be populated dynamically to include selected pair/timeframe) -->
+          <a class="btn ghost" id="contactTelegramModal" href="#" target="_blank" rel="noopener">Contact via Telegram</a>
+          <button class="btn ghost" id="supportLater">Maybe later</button>
+        </div>
+
+        <div style="margin-top:14px;color:var(--muted);font-size:13px">Pro tip: include your account email and preferred pair/timeframe for faster activation.</div>
+      </div>
+    </div>
+  </div>
+
 <script>
-/* ======= Finalized script ======= */
+/* ======= Finalized script (tweaks & Telegram button added) ======= */
 /* subscription flag: change to true for testing unlocked UI */
 let isSubscribed = false; // default locked for demo
 
@@ -225,14 +298,39 @@ const premiumModal = document.getElementById('premiumModal');
 const modalSubscribe = document.getElementById('modalSubscribe');
 const modalLater = document.getElementById('modalLater');
 
+const supportModal = document.getElementById('supportModal');
+const contactSupport = document.getElementById('contactSupport');
+const contactTelegramModal = document.getElementById('contactTelegramModal');
+const supportLater = document.getElementById('supportLater');
+
 const btnReport = document.getElementById('btnReport');
 const btnBroker = document.getElementById('btnBroker');
 const btnDownload = document.getElementById('btnDownload');
+const btnTelegram = document.getElementById('btnTelegram'); // new telegram button
 const btnLogout = document.getElementById('btnLogout');
 
 /* helper format */
 function formatPct(n){
   return Number(n).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}) + '%';
+}
+
+/* helper: build telegram share url with prefilled message */
+function buildTelegramShareURL(message){
+  // Use t.me/share/url so browser opens share intent and user can pick Telegram app/chat
+  const base = 'https://t.me/share/url';
+  const params = new URLSearchParams({
+    url: '',
+    text: message
+  });
+  return base + '?' + params.toString();
+}
+
+/* prefilled support message (includes pair/timeframe) */
+function buildPrefillMessage(){
+  const pair = (pairValue && pairValue.textContent) ? pairValue.textContent : '—';
+  const tf = (tfValue && tfValue.textContent) ? tfValue.textContent : '—';
+  const msg = `Activation / Balance Request (ASTRONBOT.MAX)\nPair: ${pair}\nTimeframe: ${tf}\nPlease verify activation and account balance. Account email: [your email here]`;
+  return msg;
 }
 
 /* set triangles: sizes computed, numbers visible only if subscribed */
@@ -249,9 +347,8 @@ function setTriangles(up, down){
   }
 
   // Balanced scale mapping: smaller max to avoid one triangle swallowing the other
-  // Visual mapping tuned to look balanced like the original screenshot.
   const minScale = 0.86;
-  const maxExtra = 0.36; // how much scale can increase based on % (keeps triangles balanced)
+  const maxExtra = 0.36;
   const upScale = minScale + (up/100) * maxExtra;
   const downScale = minScale + (down/100) * maxExtra;
 
@@ -262,22 +359,25 @@ function setTriangles(up, down){
   upTri.style.transform = `translate(-50%, ${upOffset}px) scale(${upScale})`;
   downTri.style.transform = `translate(-50%, ${downOffset}px) scale(${downScale})`;
 
-  // recommendation text behaviour:
+  // recommendation / rec badge behaviour:
   if(isSubscribed){
     if(down > up){
       recEl.textContent = 'SELL';
       recEl.style.color = getComputedStyle(document.documentElement).getPropertyValue('--neo-red') || '#e33b3b';
+      recEl.classList.remove('clickable');
       recSmall.textContent = 'Confidence';
     } else {
       recEl.textContent = 'BUY';
       recEl.style.color = getComputedStyle(document.documentElement).getPropertyValue('--neon-green') || '#00ff33';
+      recEl.classList.remove('clickable');
       recSmall.textContent = 'Confidence';
     }
   } else {
-    // locked messaging
-    recEl.textContent = 'LOCKED';
+    // locked messaging -> show START button visually
+    recEl.textContent = 'START';
     recEl.style.color = getComputedStyle(document.documentElement).getPropertyValue('--neon-green') || '#00ff33';
-    recSmall.textContent = 'Subscribe to unlock';
+    recEl.classList.add('clickable');
+    recSmall.textContent = 'Contact support to activate';
   }
 
   metaTs.textContent = 'Last update: ' + new Date().toLocaleTimeString('en-US');
@@ -286,14 +386,12 @@ function setTriangles(up, down){
 /* initial */
 setTriangles(16.45, 83.55);
 
-/* ========== Dropdown helpers (robust) ========== */
+/* ========== Dropdown helpers ========== */
 function createDropdownShell(){
   const box = document.createElement('div');
   box.className = 'dd-box';
   box.style.position = 'absolute';
   box.style.minWidth = '200px';
-  box.style.right = (window.innerWidth < 760 ? '12px' : '22px');
-  box.style.top = '0px';
   box.style.pointerEvents = 'auto';
   box.style.background = 'linear-gradient(180deg,#071627,#03121a)';
   box.style.border = '1px solid rgba(255,255,255,0.04)';
@@ -351,8 +449,6 @@ function buildDropdownContents(box, items, onSelect){
 
 /* selection callback: demo placeholder for real API or websocket */
 function onSelectionChange(payload){
-  // payload: {pair, timeframe}
-  // replace this with real network/ws call. We'll simulate a short delay and return up/down.
   return new Promise(resolve=>{
     const latency = 300 + Math.random()*500;
     setTimeout(()=>{
@@ -380,31 +476,63 @@ function unlockUIAfterSelection(){
   selectionLock = null;
 }
 
-/* open dropdowns */
+/* open dropdowns (positioned below the controls) */
 function openPairsDropdown(){
   dropdowns.innerHTML = '';
+  // create and place directly under the pairSelect
   const box = createDropdownShell();
   buildDropdownContents(box, pairs, selectedPair);
+  const rect = pairSelect.getBoundingClientRect();
+  // position relative to the card element
+  const cardRect = document.querySelector('.card').getBoundingClientRect();
+  box.style.left = (rect.left - cardRect.left) + 'px';
+  box.style.top = (rect.bottom - cardRect.top + 8) + 'px';
   dropdowns.appendChild(box);
+  pairSelect.setAttribute('aria-expanded','true');
 }
 function openTFDropdown(){
   dropdowns.innerHTML = '';
   const box = createDropdownShell();
   buildDropdownContents(box, timeframes, selectedTF);
+  const rect = tfSelect.getBoundingClientRect();
+  const cardRect = document.querySelector('.card').getBoundingClientRect();
+  box.style.left = (rect.left - cardRect.left) + 'px';
+  box.style.top = (rect.bottom - cardRect.top + 8) + 'px';
   dropdowns.appendChild(box);
+  tfSelect.setAttribute('aria-expanded','true');
 }
 
 /* attach openers */
 pairSelect.addEventListener('click', openPairsDropdown);
 tfSelect.addEventListener('click', openTFDropdown);
 
+/* when dropdowns close, ensure aria-expanded false */
+document.addEventListener('click', (e)=>{
+  const inside = e.target.closest('.select') || e.target.closest('#dropdowns') || e.target.closest('.dd-box');
+  if(!inside){
+    dropdowns.innerHTML = '';
+    pairSelect.setAttribute('aria-expanded','false');
+    tfSelect.setAttribute('aria-expanded','false');
+  }
+});
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='Escape'){
+    dropdowns.innerHTML = '';
+    pairSelect.setAttribute('aria-expanded','false');
+    tfSelect.setAttribute('aria-expanded','false');
+    // also hide modals
+    hidePremiumModal();
+    hideSupportModal();
+  }
+});
+
 /* selection handlers */
 function selectedPair(val){
   pairValue.textContent = val;
   dropdowns.innerHTML = '';
+  pairSelect.setAttribute('aria-expanded','false');
   lockUIDuringSelection();
   onSelectionChange({pair:val, timeframe: tfValue.textContent}).then(res=>{
-    // If unsubscribed, we still use values for sizing but numbers remain hidden
     setTriangles(res.up, res.down);
     metaTF.textContent = tfValue.textContent;
     unlockUIAfterSelection();
@@ -414,6 +542,7 @@ function selectedPair(val){
 function selectedTF(val){
   tfValue.textContent = val;
   dropdowns.innerHTML = '';
+  tfSelect.setAttribute('aria-expanded','false');
   lockUIDuringSelection();
   onSelectionChange({pair: pairValue.textContent, timeframe: val}).then(res=>{
     setTriangles(res.up, res.down);
@@ -422,13 +551,6 @@ function selectedTF(val){
     if(window.onPairTimeframeUpdate) window.onPairTimeframeUpdate({pair:pairValue.textContent, timeframe:val, up:res.up, down:res.down});
   }).catch(()=> unlockUIAfterSelection());
 }
-
-/* close dropdowns on outside click / ESC */
-document.addEventListener('click', (e)=>{
-  const inside = e.target.closest('.select') || e.target.closest('#dropdowns') || e.target.closest('.dd-box');
-  if(!inside) dropdowns.innerHTML = '';
-});
-document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') dropdowns.innerHTML = ''; });
 
 /* background animation: matrix + bokeh drift */
 (function backgroundCanvas(){
@@ -460,11 +582,9 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') dropdowns.inner
 
   function frame(now){
     const dt = now - last; last = now;
-    // draw blurred, softer background with a cyan gradient wash to match screenshot color
     ctx.fillStyle = 'rgba(2,10,20,0.25)';
     ctx.fillRect(0,0,w,h);
 
-    // faint vertical streaks to make background more lively
     for(let i=0;i<6;i++){
       ctx.globalAlpha = 0.02 + i*0.01;
       ctx.fillStyle = `rgba(18,120,170,${0.02 + i*0.02})`;
@@ -480,12 +600,10 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') dropdowns.inner
     for(let i=0;i<cols;i+=step){
       const x = i*colW + (Math.random()*4 - 2);
       let y = drops[i];
-      // pale blurred tails
       ctx.fillStyle = 'rgba(220,240,255,0.05)';
       for(let t=0;t<4;t++){
         ctx.fillText(glyphs.charAt(Math.floor(Math.random()*glyphs.length)), x, y - t*10);
       }
-      // bright head (neon green)
       ctx.fillStyle = 'rgba(0,255,102,0.85)';
       ctx.fillText(glyphs.charAt(Math.floor(Math.random()*glyphs.length)), x, y);
       drops[i] = y + (2 + Math.random()*8) * (small()? 0.6:1.0);
@@ -516,7 +634,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') dropdowns.inner
 
 })();
 
-/* auto updates (gentle), but if subscription locked we still update shapes so look live */
+/* auto updates (gentle) */
 let autoUpdate = setInterval(()=>{
   if(selectionLock) return;
   const up = +(Math.random()*70 + 8).toFixed(2);
@@ -539,22 +657,57 @@ modalSubscribe?.addEventListener('click', ()=> {
   // Demo subscribe flow: unlock UI
   isSubscribed = true;
   hidePremiumModal();
-  // Immediately reveal numbers by triggering an update
   const up = +(Math.random()*70 + 8).toFixed(2);
   const down = +(100 - up).toFixed(2);
   setTriangles(up, down);
 });
 
-/* Block buttons with modal if not subscribed */
+/* Support modal */
+function showSupportModal(){
+  // populate modal telegram link with current pair/timeframe
+  const msg = buildPrefillMessage();
+  contactTelegramModal.href = buildTelegramShareURL(msg);
+  supportModal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function hideSupportModal(){
+  supportModal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+supportLater?.addEventListener('click', ()=> { hideSupportModal(); });
+
+/* rec badge click behavior (START when locked) */
+recEl?.addEventListener('click', (e)=>{
+  if(!isSubscribed){
+    // open support modal which now contains Telegram contact
+    showSupportModal();
+    e.preventDefault();
+    return;
+  }
+  // if subscribed, no-op (or add behavior)
+});
+
+/* TELEGRAM button behavior (main button) */
+btnTelegram?.addEventListener('click', (e)=>{
+  // Build dynamic message with current pair/timeframe
+  const msg = buildPrefillMessage();
+  const url = buildTelegramShareURL(msg);
+  // open in new tab/window
+  window.open(url, '_blank', 'noopener');
+});
+
+/* Also update modal telegram button dynamically when user changes pair/timeframe */
+pairSelect.addEventListener('click', ()=> { /* handled by selection flow when choosing pair */ });
+tfSelect.addEventListener('click', ()=> { /* handled by selection flow when choosing timeframe */ });
+
+/* Block action buttons if not subscribed */
 [btnReport, btnBroker, btnDownload, btnLogout].forEach(btn => {
   btn.addEventListener('click', (e)=>{
     if(!isSubscribed) {
-      // show premium modal with strong psychology messaging
       showPremiumModal();
       e.preventDefault();
       return;
     }
-    // if subscribed, normal behaviour (download/demo)
     if(btn === btnDownload){
       const csv = 'pair,timeframe,up,down\n' + pairValue.textContent + ',' + tfValue.textContent + ',' + upText.textContent + ',' + downText.textContent;
       const blob = new Blob([csv], {type:'text/csv'});
