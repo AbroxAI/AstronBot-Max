@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>ASTRONBOT.MAX — Exact Clone</title>
 
   <!-- Fonts -->
@@ -10,265 +10,181 @@
 
   <style>
     :root{
-      /* color tuning to better match screenshot neon/greens */
       --brand-neon:#00ff33;
       --btn-green:#21C06A;
       --btn-green-dark:#1fbf3b;
       --tri-red:#ef4444;
-      --panel: rgba(2,6,10,0.65);
+      --panel: rgba(2,6,10,0.72);
       --amber:#f59e0b;
       --muted:#cbd5e1;
-      --max-width: 980px;
-      --dropdown-blue-start: #1b2a44;
-      --dropdown-blue-end: #122034;
+      --bg-dark:#020406;
+      --max-width:1000px;
     }
-
     *{box-sizing:border-box}
-    html,body{height:100%}
+    html,body{height:100%; margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
     body{
-      margin:0;
-      font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
-      background:linear-gradient(180deg,#020406 0%, #061426 100%);
-      color:#fff;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      display:flex;
-      justify-content:center;
-      padding:28px;
+      background:linear-gradient(180deg,var(--bg-dark) 0%, #071427 100%);
+      color:#fff; display:flex; justify-content:center; padding:18px;
     }
 
     .card {
-      width:100%;
-      max-width:var(--max-width);
-      border-radius:18px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,0.04);
-      box-shadow:0 10px 40px rgba(0,0,0,0.6);
-      background:linear-gradient(180deg, rgba(1,6,10,0.9), rgba(2,8,12,0.95));
-      position:relative;
-      min-height:700px;
+      width:100%; max-width:var(--max-width);
+      border-radius:14px; overflow:visible; position:relative;
+      background:linear-gradient(180deg, rgba(1,6,10,0.95), rgba(3,8,14,0.98));
+      border:1px solid rgba(255,255,255,0.03);
+      min-height:640px; box-shadow:0 12px 50px rgba(0,0,0,0.6);
     }
 
     header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:12px 18px;
-      border-bottom:1px solid rgba(255,255,255,0.03);
-      background:linear-gradient(180deg, rgba(2,6,10,0.75), rgba(2,6,10,0.6));
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:12px 18px; border-bottom:1px solid rgba(255,255,255,0.03);
+      background:linear-gradient(180deg, rgba(2,6,10,0.7), rgba(2,6,10,0.5));
+      position:relative; z-index:40;
     }
-    .logo { display:flex; gap:12px; align-items:center; }
-    .logo img{height:46px; width:auto;}
-    .logo .subtitle{font-size:12px; color:var(--muted); letter-spacing:2px}
+
+    .logo { display:flex; align-items:center; gap:12px; min-width:0; }
+    .logo img{height:48px; width:auto; object-fit:contain}
+    .logo-mark { width:36px; height:36px; background:linear-gradient(180deg,#00ff33,#1fbf3b); clip-path: polygon(50% 0%, 100% 100%, 0% 100%); box-shadow:0 0 12px rgba(0,255,51,0.9); border-radius:4px; }
 
     .logo-text {
       font-family:Orbitron, sans-serif;
       color:var(--brand-neon);
       font-weight:900;
-      font-size:36px;
-      letter-spacing:2px;
-      text-transform:uppercase;
-      -webkit-text-stroke: 0.8px rgba(0,0,0,0.55);
-      text-shadow:
-        0 0 4px rgba(0,255,51,0.85),
-        0 0 18px rgba(0,255,51,0.28),
-        0 8px 40px rgba(0,0,0,0.6);
+      font-size:clamp(18px, 4.2vw, 34px);
       line-height:1;
+      display:flex; align-items:center; gap:8px; white-space:nowrap;
+      text-shadow: 0 0 6px rgba(0,255,51,0.9), 0 8px 24px rgba(0,0,0,0.6);
+      -webkit-text-stroke: 0.6px rgba(0,0,0,0.45);
     }
-    .logo-mark {
-      width:30px; height:30px;
-      display:inline-block;
-      background:linear-gradient(180deg,#00ff33,#1fbf3b);
-      clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-      box-shadow: 0 0 12px rgba(0,255,51,0.95), 0 6px 16px rgba(0,0,0,0.6);
-      margin-right:6px; border-radius:2px;
-    }
+    .subtitle{ font-size:12px; color:var(--muted); letter-spacing:1.4px; text-transform:uppercase; margin-top:4px; }
 
-    .controls{display:flex; gap:12px; align-items:center}
+    .controls{ display:flex; gap:12px; align-items:center; }
+
     .select-wrap {
-      position:relative;
-      background:linear-gradient(180deg, var(--dropdown-blue-start), var(--dropdown-blue-end));
-      padding:8px 12px;
-      border-radius:8px;
-      min-width:110px;
-      cursor:pointer;
-      border:1px solid rgba(0,0,0,0.25);
-      box-shadow: inset 0 -2px 8px rgba(0,0,0,0.2);
+      position:relative; min-width:110px; max-width:260px;
+      background:linear-gradient(180deg,#142435,#0e1a28); padding:8px 14px; border-radius:10px;
+      cursor:pointer; border:1px solid rgba(255,255,255,0.03); box-shadow: inset 0 -4px 10px rgba(0,0,0,0.25);
+      color:#e9f6ff;
     }
-    .select-wrap::after{
-      content: "▾";
-      position:absolute; right:8px; top:50%; transform:translateY(-50%);
-      color:rgba(255,255,255,0.9); font-size:12px; pointer-events:none; opacity:0.95;
-    }
-    .select-label{font-size:11px; color:var(--muted); letter-spacing:0.2px; margin-bottom:2px}
-    .select-value{font-weight:700; color:#e6f7ff; font-size:14px}
+    .select-label{ font-size:11px; color:var(--muted); margin-bottom:4px; display:block }
+    .select-value{ font-weight:700; font-size:14px; display:block; letter-spacing:0.2px }
 
-    main{padding:14px 20px; display:flex; justify-content:center;}
-    .main-inner{
-      width:760px; max-width: calc(100% - 40px);
-      background:var(--panel); padding:18px; border-radius:12px;
-      border:1px solid rgba(255,255,255,0.04); position:relative; margin:0 auto; overflow:visible;
-    }
+    /* dropdown */
+    .dropdown { position:absolute; top:calc(100% + 8px); left:0; right:auto; min-width:160px; background:#06111a; border-radius:10px; padding:8px; display:none; box-shadow:0 16px 40px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.03); z-index:120; max-height:300px; overflow:auto; -webkit-overflow-scrolling:touch; }
+    .dropdown.show{ display:block; }
+    .dropdown .search { display:block; width:100%; padding:8px; margin-bottom:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.03); background:rgba(255,255,255,0.02); color:#eaf6ff; }
+    .dropdown .item{ padding:9px 10px; border-radius:8px; color:#e6eef6; font-weight:700; cursor:pointer; margin-bottom:6px; }
+    .dropdown .item:last-child{ margin-bottom:0 }
+    .dropdown .item[aria-selected="true"], .dropdown .item:hover{ background: rgba(255,255,255,0.03); }
 
-    .bg-blur {
-      position:absolute; inset:0; z-index:-4;
-      background-image:url('./assets/bg-blur.jpg');
-      background-size:cover; background-position:center;
-      filter: blur(6px) saturate(125%) contrast(105%);
-      opacity:0.95; transform:scale(1.02);
-      animation: slowPan 14s linear infinite;
-    }
-    @keyframes slowPan {
-      0% { background-position: 48% 46%; transform: scale(1.02) translateY(0px); }
-      50% { background-position: 52% 54%; transform: scale(1.03) translateY(-8px); }
-      100% { background-position: 48% 46%; transform: scale(1.02) translateY(0px); }
-    }
-    .bg-overlay{ position:absolute; inset:0; z-index:-3; background:linear-gradient(180deg, rgba(2,6,10,0.45), rgba(2,6,10,0.6)); }
+    main{ padding:14px 20px; position:relative; display:flex; justify-content:center; }
+    .main-inner{ width:860px; max-width:calc(100% - 40px); background:var(--panel); padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.04); position:relative; overflow:visible; }
 
-    .particles { position:absolute; inset:0; z-index:-2; pointer-events:none; overflow:hidden; }
-    .particle { position:absolute; width:6px; height:6px; border-radius:50%; background:rgba(0,255,51,0.10); filter: blur(6px); box-shadow: 0 0 12px rgba(0,255,51,0.10); opacity:0.85; }
+    /* canvas background for numeric algorithm */
+    #algoCanvas{ position:absolute; inset:0; z-index:-6; width:100%; height:100%; display:block; }
 
-    .center-col{display:flex; flex-direction:column; align-items:center; gap:18px}
-    .triangle-area { width:100%; height:380px; display:flex; align-items:center; justify-content:center; position:relative; overflow:visible; }
+    .particles { position:absolute; inset:0; z-index:-4; pointer-events:none; overflow:hidden; }
 
-    .up-tri{ position:absolute; top:10px; left:50%; transform-origin:center; transform:translate(-50%,-6px); z-index:8; }
-    .down-tri{ position:absolute; left:50%; transform-origin:center; transform:translate(-50%,36px); z-index:12; }
+    .center-col{ display:flex; flex-direction:column; align-items:center; gap:18px; position:relative; z-index:8; }
+    .triangle-area{ width:100%; height:380px; display:flex; align-items:center; justify-content:center; position:relative; overflow:visible; }
 
-    .down-glow{
-      position:absolute; width:70px; height:48px; border-radius:50%;
-      background: radial-gradient(ellipse at center, rgba(0,255,51,0.95) 0%, rgba(0,255,51,0.35) 20%, rgba(0,255,51,0.06) 60%, rgba(0,0,0,0) 100%);
-      bottom:42%; left:50%; transform:translate(-50%,38%);
-      filter: blur(6px) saturate(120%); z-index:7; pointer-events:none;
-    }
+    /* triangles responsive */
+    .up-tri, .down-tri { position:absolute; transform-origin:center; transition:transform .36s cubic-bezier(.2,.9,.2,1); }
+    .up-tri { top:12%; left:50%; transform:translateX(-50%); z-index:10; }
+    .down-tri { top:36%; left:50%; transform:translateX(-50%); z-index:12; }
 
-    .connector{
-      position:absolute; width:28%; height:6px;
-      background:linear-gradient(90deg, rgba(0,255,51,0.12), rgba(255,255,255,0.03), rgba(239,68,68,0.08));
-      border-radius:6px; top:50%; box-shadow: 0 6px 18px rgba(0,0,0,0.6), inset 0 0 12px rgba(255,255,255,0.02);
-      transform:translateY(-2px); z-index:6;
-    }
+    /* small glow under bottom triangle */
+    .down-glow{ position:absolute; width:80px; height:46px; border-radius:50%; background: radial-gradient(ellipse at center, rgba(0,255,51,0.95) 0%, rgba(0,255,51,0.25) 30%, rgba(0,0,0,0) 70%); bottom:18%; left:50%; transform:translateX(-50%); filter:blur(6px); z-index:7 }
 
-    .rec-badge{
-      position:absolute; left:18px; bottom:22px;
-      background:linear-gradient(180deg, rgba(3,6,10,0.72), rgba(7,9,12,0.6));
-      padding:8px 14px; border-radius:999px; display:flex; gap:8px; align-items:center;
-      border:1px solid rgba(255,255,255,0.05); box-shadow: 0 6px 18px rgba(0,0,0,0.6), 0 0 12px rgba(0,0,0,0.35); z-index:14;
-    }
-    .rec-badge .rec { font-weight:900; font-size:14px; letter-spacing:0.6px; text-transform:uppercase; }
-    .rec-badge .small { font-size:12px; color:var(--muted) }
+    .connector { position:absolute; width:28%; height:6px; background:linear-gradient(90deg, rgba(0,255,51,0.14), rgba(255,255,255,0.03), rgba(239,68,68,0.08)); border-radius:6px; top:50%; left:50%; transform:translate(-50%,-2px); z-index:6; box-shadow:0 10px 30px rgba(0,0,0,0.6) }
 
-    .up-tri svg text, .down-tri svg text {
-      font-family: 'Orbitron', sans-serif; font-weight:900; fill:#fff; paint-order:stroke fill;
-    }
+    .rec-badge{ position:absolute; left:18px; bottom:22px; background:linear-gradient(180deg, rgba(3,6,10,0.72), rgba(7,9,12,0.6)); padding:8px 14px; border-radius:999px; display:flex; gap:8px; align-items:center; border:1px solid rgba(255,255,255,0.05); z-index:14; }
+    .rec { font-weight:900; font-size:14px }
+    .small { font-size:12px; color:var(--muted) }
 
     .pills{ display:flex; flex-direction:column; gap:12px; align-items:center; margin-top:6px; }
-    .pill { width:220px; min-height:44px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; cursor:pointer; user-select:none; box-shadow:0 8px 20px rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.04); text-transform:uppercase; }
+    .pill { width:220px; min-height:44px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; cursor:pointer; user-select:none; box-shadow:0 12px 30px rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.04); text-transform:uppercase; }
     .pill.green{ background:linear-gradient(180deg, var(--btn-green) 0%, var(--btn-green-dark) 95%); color:#071013; }
-    .pill.orange{ background:linear-gradient(180deg, #fbbf24 0%, var(--amber) 95%); color:#071013; width:140px; }
+    .pill.orange{ background:linear-gradient(180deg, #fbbf24 0%, var(--amber) 95%); color:#071013; width:150px; }
 
     .footer { display:flex; justify-content:flex-end; padding:10px 20px; border-top:1px solid rgba(255,255,255,0.02); align-items:center; position:relative; z-index:4; }
     .flag { width:36px; height:22px; background-image:url('./assets/en-flag.png'); background-size:cover; border-radius:4px; border:1px solid rgba(0,0,0,0.2); }
 
-    .dropdown { position:absolute; top:calc(100% + 8px); left:0; background:#06111a; border-radius:8px; padding:6px; display:none; box-shadow:0 8px 30px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.03); z-index:40; min-width:160px; }
-    .dropdown.show{ display:block; }
-    .dropdown .item{ padding:8px 10px; border-radius:6px; color:#e6eef6; font-weight:600; cursor:pointer; }
-    .dropdown .item:hover, .dropdown .item[aria-selected="true"]{ background: rgba(255,255,255,0.03); }
-
-    aside.left-panel{ width:260px; position:absolute; left:0; top:74px; bottom:56px; background:linear-gradient(180deg,#0b1220,#07101a); border-right:1px solid rgba(255,255,255,0.03); padding:12px; border-top-left-radius:18px; border-bottom-left-radius:18px; display:flex; flex-direction:column; gap:10px; z-index:6; }
-    aside.left-panel .item{ background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.01)); padding:8px 10px; border-radius:8px; color:#dfeaf0; font-weight:600; }
-
-    @media (max-width:820px){
-      .main-inner{ width:94% }
+    @media (max-width:900px){
+      .main-inner{ width:calc(100% - 24px); padding:16px; }
       .triangle-area{ height:320px }
-      .pill{ width:180px }
-      aside.left-panel{ display:none; }
-      .logo-text{ font-size:28px; }
+      .pills{ flex-direction:column }
     }
-
-    @keyframes pulseGlow {
-      0% { filter: drop-shadow(0 0 6px rgba(0,255,51,0.25)); transform: translateY(0) scale(1); }
-      50% { filter: drop-shadow(0 0 22px rgba(0,255,51,0.36)); transform: translateY(-2px) scale(1.02); }
-      100% { filter: drop-shadow(0 0 6px rgba(0,255,51,0.25)); transform: translateY(0) scale(1); }
+    @media (max-width:560px){
+      header{ padding:12px; gap:8px }
+      .logo img{ height:38px }
+      .logo-text{ font-size:20px }
+      .triangle-area{ height:260px }
+      .pill{ width:170px; font-size:13px }
     }
-    .up-tri svg, .down-tri svg { transition: transform .28s ease; }
-    .up-tri { animation: pulseGlow 2.6s infinite ease-in-out; transform-origin:center; }
-    .down-tri { animation: pulseGlow 3.0s infinite ease-in-out; transform-origin:center; }
   </style>
 </head>
 <body>
-
   <div class="card" role="application" aria-label="ASTRONBOT.MAX interface clone">
-    <aside class="left-panel" aria-hidden="false" aria-label="Market panel">
-      <div style="color:var(--muted); font-size:13px; margin-bottom:6px;">Market Prices</div>
-      <div class="item">1160.50</div>
-      <div class="item">1158.40</div>
-      <div class="item">1156.90</div>
-      <div class="item">1154.20</div>
-      <div class="item">1151.30</div>
-      <div class="item">1149.05</div>
-      <div class="item">1145.80</div>
-    </aside>
-
     <header>
-      <div class="logo" style="gap:12px;">
-        <img src="./assets/logo-astronbot.png" alt="ASTRONBOT.MAX logo" onerror="this.style.display='none'">
-        <div style="display:flex; align-items:center;">
-          <span class="logo-mark" aria-hidden="true"></span>
-          <div style="display:flex; flex-direction:column; margin-left:6px;">
+      <div class="logo" style="align-items:center;">
+        <img src="./assets/logo-astronbot.png" alt="ASTRONBOT logo" onerror="this.style.display='none'">
+        <div style="display:flex; flex-direction:column; min-width:0;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="logo-mark" aria-hidden="true"></span>
             <div class="logo-text" aria-hidden>ASTRONBOT.MAX</div>
-            <div class="subtitle">TRADING A.I.</div>
           </div>
+          <div class="subtitle">TRADING A.I.</div>
         </div>
       </div>
 
       <div class="controls" aria-hidden="false">
         <div class="select-wrap" id="pairSelect" tabindex="0" aria-haspopup="listbox" aria-expanded="false" aria-controls="pairList">
-          <div style="font-size:11px;color:var(--muted);margin-bottom:2px;">Pair</div>
-          <div class="select-value" id="pairValue">NZDCAD</div>
-          <div class="dropdown" role="listbox" id="pairList" aria-labelledby="pairSelect" data-type="pair"></div>
+          <span class="select-label">Pair</span>
+          <span class="select-value" id="pairValue">NZDCAD</span>
+          <div class="dropdown" role="listbox" id="pairList" aria-labelledby="pairSelect" data-type="pair">
+            <input class="search" id="pairSearch" placeholder="Search pairs" aria-label="Search pairs">
+            <!-- items populated by JS -->
+          </div>
         </div>
 
         <div class="select-wrap" id="tfSelect" tabindex="0" aria-haspopup="listbox" aria-expanded="false" aria-controls="tfList">
-          <div style="font-size:11px;color:var(--muted);margin-bottom:2px;">Timeframe</div>
-          <div class="select-value" id="tfValue">M1</div>
-          <div class="dropdown" role="listbox" id="tfList" aria-labelledby="tfSelect" data-type="timeframe"></div>
+          <span class="select-label">Timeframe</span>
+          <span class="select-value" id="tfValue">M1</span>
+          <div class="dropdown" role="listbox" id="tfList" aria-labelledby="tfSelect" data-type="timeframe">
+            <input class="search" id="tfSearch" placeholder="Search timeframes" aria-label="Search timeframes">
+          </div>
         </div>
       </div>
     </header>
 
     <main>
       <div class="main-inner" role="main">
-        <div class="bg-blur" aria-hidden="true"></div>
-        <div class="bg-overlay" aria-hidden="true"></div>
+        <!-- algorithm canvas sits behind everything -->
+        <canvas id="algoCanvas" aria-hidden="true"></canvas>
         <div class="particles" id="particles" aria-hidden="true"></div>
 
         <div class="center-col">
           <div class="triangle-area" aria-hidden="false">
-            <div class="up-tri" style="z-index:10;">
-              <svg viewBox="0 0 100 100" width="180" height="180" aria-hidden="true">
+            <div class="up-tri" id="upTriContainer" aria-hidden="true">
+              <svg viewBox="0 0 100 100" width="180" height="180" id="upTriSvg" role="img" aria-label="Up triangle">
                 <defs>
-                  <filter id="glowGreen" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="6" result="b"/>
-                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                  </filter>
+                  <filter id="g1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
                 </defs>
-                <polygon points="50,6 95,86 5,86" fill="#00d64a" filter="url(#glowGreen)"></polygon>
-                <text x="50" y="62" text-anchor="middle" font-weight="800" font-size="16" fill="#ffffff" style="font-family:Orbitron, sans-serif">16,45%</text>
+                <polygon id="upPoly" points="50,6 95,86 5,86" fill="#00d64a" filter="url(#g1)"></polygon>
+                <text id="upText" x="50" y="62" text-anchor="middle" font-size="16" font-weight="900" fill="#ffffff" style="font-family:Orbitron, sans-serif">16,45%</text>
               </svg>
             </div>
 
             <div class="connector" aria-hidden="true"></div>
 
-            <div class="down-tri" style="z-index:12;">
-              <svg viewBox="0 0 100 100" width="260" height="260" aria-hidden="true">
+            <div class="down-tri" id="downTriContainer" aria-hidden="true">
+              <svg viewBox="0 0 100 100" width="240" height="240" id="downTriSvg" role="img" aria-label="Down triangle">
                 <defs>
-                  <filter id="glowRed" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="5" result="b"/>
-                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                  </filter>
+                  <filter id="g2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
                 </defs>
-                <polygon points="50,95 95,15 5,15" fill="#ef4444" filter="url(#glowRed)"></polygon>
-                <text x="50" y="56" text-anchor="middle" font-weight="900" font-size="20" fill="#fff" style="font-family:Orbitron, sans-serif;text-shadow:0 2px 6px rgba(0,0,0,0.45)">83,55%</text>
+                <polygon id="downPoly" points="50,95 95,15 5,15" fill="#ef4444" filter="url(#g2)"></polygon>
+                <text id="downText" x="50" y="56" text-anchor="middle" font-size="20" font-weight="900" fill="#fff" style="font-family:Orbitron, sans-serif;text-shadow:0 2px 6px rgba(0,0,0,0.45)">83,55%</text>
               </svg>
             </div>
 
@@ -280,7 +196,7 @@
             </div>
           </div>
 
-          <div style="max-width:640px;text-align:center;color:var(--muted);font-size:13px;">
+          <div style="max-width:720px;text-align:center;color:var(--muted);font-size:13px;">
             Percentages estimated by the model — window: <span id="metaTF">M1</span> — <span id="metaTs">Last update: —</span>
           </div>
 
@@ -302,210 +218,317 @@
         <div style="color:var(--muted); font-size:13px;">English</div>
       </div>
     </div>
-
   </div>
 
 <script>
-  // CONFIG: pairs and timeframes (exactly as requested)
-  const pairs = ['NZDCAD','EURUSD','GBPUSD','USDJPY','AUDUSD','USDCAD','EURJPY','BTCUSD'];
-  const timeframes = ['M1','M5','M15','M30','H1','H4','D1'];
+/* ------------------ CONFIG ------------------ */
+const pairs = ['NZDCAD','EURUSD','GBPUSD','USDJPY','AUDUSD','USDCAD','EURJPY','BTCUSD','ETHUSD','XAUUSD','USDTUSD'];
+const timeframes = ['M1','M5','M15','M30','H1','H4','D1','W1'];
 
-  // DOM refs
-  const pairSelect = document.getElementById('pairSelect');
-  const pairValue = document.getElementById('pairValue');
-  const pairList = document.getElementById('pairList');
+/* DOM refs */
+const pairSelect = document.getElementById('pairSelect');
+const pairValue = document.getElementById('pairValue');
+const pairList = document.getElementById('pairList');
+const pairSearch = document.getElementById('pairSearch');
 
-  const tfSelect = document.getElementById('tfSelect');
-  const tfValue = document.getElementById('tfValue');
-  const tfList = document.getElementById('tfList');
+const tfSelect = document.getElementById('tfSelect');
+const tfValue = document.getElementById('tfValue');
+const tfList = document.getElementById('tfList');
+const tfSearch = document.getElementById('tfSearch');
 
-  // populate helper
-  function buildList(container, items, onSelect){
-    container.innerHTML = '';
-    items.forEach((it)=>{
-      const div = document.createElement('div');
-      div.className = 'item';
-      div.tabIndex = 0;
-      div.textContent = it;
-      div.setAttribute('role','option');
-      div.setAttribute('aria-selected','false');
-      div.addEventListener('click', ()=> onSelect(it));
-      div.addEventListener('keydown', (e)=>{
-        if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect(it); }
-      });
-      container.appendChild(div);
-    });
-  }
+const upText = document.getElementById('upText');
+const downText = document.getElementById('downText');
+const upTriContainer = document.getElementById('upTriContainer');
+const downTriContainer = document.getElementById('downTriContainer');
+const recLabel = document.getElementById('recLabel');
+const metaTF = document.getElementById('metaTF');
+const metaTs = document.getElementById('metaTs');
 
-  buildList(pairList, pairs, (v)=> selectPair(v));
-  buildList(tfList, timeframes, (v)=> selectTF(v));
-
-  function toggleDropdown(el, show){
-    if(show){
-      el.classList.add('show');
-      el.parentElement.setAttribute('aria-expanded','true');
-    } else {
-      el.classList.remove('show');
-      el.parentElement.setAttribute('aria-expanded','false');
-    }
-  }
-  function closeAllDropdowns(){
-    document.querySelectorAll('.dropdown').forEach(d=> d.classList.remove('show'));
-    document.querySelectorAll('.select-wrap').forEach(s=> s.setAttribute('aria-expanded','false'));
-  }
-
-  function selectPair(val){
-    pairValue.textContent = val;
-    toggleDropdown(pairList, false);
-    updateSelected(pairList, val);
-    randomizePercentages();
-  }
-  function selectTF(val){
-    tfValue.textContent = val;
-    document.getElementById('metaTF').textContent = val;
-    toggleDropdown(tfList, false);
-    updateSelected(tfList, val);
-    randomizePercentages();
-  }
-  function updateSelected(container, value){
-    const items = container.querySelectorAll('.item');
-    items.forEach(it => {
-      if(it.textContent === value) it.setAttribute('aria-selected','true'); else it.setAttribute('aria-selected','false');
-    });
-  }
-
-  function attachSelectHandlers(wrap, list){
-    wrap.addEventListener('click', (e)=>{
-      const isShown = list.classList.contains('show');
-      closeAllDropdowns();
-      toggleDropdown(list, !isShown);
-    });
-    wrap.addEventListener('keydown', (e)=>{
-      if(e.key === 'Enter' || e.key === ' '){
-        e.preventDefault();
-        const isShown = list.classList.contains('show');
-        closeAllDropdowns();
-        toggleDropdown(list, !isShown);
-      } else if(e.key === 'Escape'){
-        closeAllDropdowns();
+/* Populate dropdowns with searchable items */
+function buildList(container, items, onSelect){
+  container.innerHTML = '';
+  const searchInput = container.querySelector('.search');
+  if(searchInput) {
+    searchInput.value = '';
+    searchInput.addEventListener('input', ()=> {
+      const q = searchInput.value.trim().toLowerCase();
+      fill();
+      function fill(){
+        container.querySelectorAll('.item').forEach(it => {
+          const txt = it.textContent.toLowerCase();
+          it.style.display = txt.includes(q) ? '' : 'none';
+        });
       }
     });
   }
-  attachSelectHandlers(pairSelect, pairList);
-  attachSelectHandlers(tfSelect, tfList);
-
-  document.addEventListener('click', (e)=>{
-    if(!e.target.closest('.select-wrap')) closeAllDropdowns();
+  items.forEach(it => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.tabIndex = 0;
+    div.textContent = it;
+    div.setAttribute('role','option');
+    div.setAttribute('aria-selected','false');
+    div.addEventListener('click', ()=> onSelect(it));
+    div.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect(it); }
+    });
+    container.appendChild(div);
   });
-  document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape') closeAllDropdowns();
+}
+
+buildList(pairList, pairs, v => selectPair(v));
+buildList(tfList, timeframes, v => selectTF(v));
+
+/* dropdown toggles with proper z-index and touch friendly behavior */
+function toggleDropdown(el, show){
+  if(show){ el.classList.add('show'); el.parentElement.setAttribute('aria-expanded','true'); }
+  else { el.classList.remove('show'); el.parentElement.setAttribute('aria-expanded','false'); }
+}
+function closeAllDropdowns(){
+  document.querySelectorAll('.dropdown').forEach(d=> d.classList.remove('show'));
+  document.querySelectorAll('.select-wrap').forEach(s=> s.setAttribute('aria-expanded','false'));
+}
+
+function attachSelectHandlers(wrap, list){
+  wrap.addEventListener('click', (e)=>{
+    const isShown = list.classList.contains('show');
+    closeAllDropdowns();
+    toggleDropdown(list, !isShown);
   });
-
-  // Percent formatting with comma (pt-BR style)
-  function formatPctWithComma(n){
-    return Number(n).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}) + '%';
-  }
-
-  function updateTriangles(up, down){
-    const upSvg = document.querySelector('.up-tri svg text');
-    const downSvg = document.querySelector('.down-tri svg text');
-    if(upSvg) upSvg.textContent = formatPctWithComma(up);
-    if(downSvg) downSvg.textContent = formatPctWithComma(down);
-
-    const rec = document.getElementById('recLabel');
-    if(down > up){
-      rec.textContent = 'SELL';
-      rec.style.color = 'var(--tri-red)';
-    } else {
-      rec.textContent = 'BUY';
-      rec.style.color = 'var(--brand-neon)';
-    }
-
-    const ts = new Date();
-    document.getElementById('metaTs').textContent = 'Last update: ' + ts.toLocaleTimeString('en-US');
-  }
-
-  // Demo randomizer (replace with live feed)
-  function randomizePercentages(){
-    const a = Math.round(Math.random()*85 + 5); // 5..90
-    const b = 100 - a;
-    updateTriangles(a, b);
-  }
-
-  // initial seed
-  updateTriangles(16.45, 83.55);
-
-  // Buttons
-  document.getElementById('btnReport').addEventListener('click', ()=> alert('Open report — to be implemented'));
-  document.getElementById('btnBroker').addEventListener('click', ()=> alert('Change broker — to be implemented'));
-  document.getElementById('btnDownload').addEventListener('click', ()=> {
-    const csv = 'pair,timeframe,up,down\n' + pairValue.textContent + ',' + tfValue.textContent + ',' + document.querySelector('.up-tri svg text').textContent + ',' + document.querySelector('.down-tri svg text').textContent;
-    const blob = new Blob([csv], {type:'text/csv'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = 'sheet.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-  });
-  document.getElementById('btnLogout').addEventListener('click', ()=> alert('Logout — to be implemented'));
-
-  // Animated particle overlay
-  (function createParticles(){
-    const container = document.getElementById('particles');
-    if(!container) return;
-    const count = 34;
-    for(let i=0;i<count;i++){
-      const p = document.createElement('div');
-      p.className = 'particle';
-      const size = Math.random()*8 + 2;
-      p.style.width = size + 'px';
-      p.style.height = size + 'px';
-      p.style.left = (Math.random()*90 + 5) + '%';
-      p.style.top = (Math.random()*80 + 8) + '%';
-      const alpha = 0.05 + Math.random()*0.18;
-      p.style.background = 'rgba(0,255,51,'+alpha+')';
-      p.style.filter = 'blur(' + (2 + Math.random()*6) + 'px)';
-      const dur = 8 + Math.random()*22;
-      const delay = Math.random()*-10;
-      p.style.transition = 'transform ' + dur + 's linear ' + delay + 's, opacity ' + (6+Math.random()*12) + 's linear ' + delay + 's';
-      container.appendChild(p);
-
-      (function animateEl(el, d){
-        function tick(){
-          el.style.transform = 'translate(' + ((Math.random()*12)-6) + 'px,' + ((Math.random()*28)-14) + 'px) scale(' + (0.6 + Math.random()*1.0) + ')';
-          el.style.opacity = 0.25 + Math.random()*0.8;
-          setTimeout(tick, d*1000);
-        }
-        setTimeout(tick, Math.random()*500);
-      })(p, dur + (Math.random()*6));
-    }
-  })();
-
-  // Recreate particles on resize
-  window.addEventListener('resize', ()=> {
-    const container = document.getElementById('particles');
-    if(!container) return;
-    container.innerHTML = '';
-    const count = 34;
-    for(let i=0;i<count;i++){
-      const p = document.createElement('div');
-      p.className = 'particle';
-      const size = Math.random()*8 + 2;
-      p.style.width = size + 'px';
-      p.style.height = size + 'px';
-      p.style.left = Math.random()*100 + '%';
-      p.style.top = Math.random()*100 + '%';
-      const alpha = 0.05 + Math.random()*0.18;
-      p.style.background = 'rgba(0,255,51,'+alpha+')';
-      p.style.filter = 'blur(' + (2 + Math.random()*6) + 'px)';
-      p.style.transition = 'transform ' + (8 + Math.random()*18) + 's linear';
-      container.appendChild(p);
-    }
-  });
-
-  // Accessibility: close dropdowns when focus moves outside
-  document.addEventListener('focusin', (e) => {
-    if(!e.target.closest('.select-wrap')) {
+  // keyboard
+  wrap.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      const isShown = list.classList.contains('show');
       closeAllDropdowns();
+      toggleDropdown(list, !isShown);
+    } else if(e.key === 'Escape') {
+      closeAllDropdowns();
+      wrap.blur();
     }
   });
+  // close when focus moves away
+  list.addEventListener('focusout', (ev)=> {
+    if(!ev.relatedTarget || !ev.relatedTarget.closest('.dropdown')) {
+      toggleDropdown(list, false);
+    }
+  });
+}
+attachSelectHandlers(pairSelect, pairList);
+attachSelectHandlers(tfSelect, tfList);
+
+document.addEventListener('click', (e)=> { if(!e.target.closest('.select-wrap')) closeAllDropdowns(); });
+document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') closeAllDropdowns(); });
+
+function updateSelected(container, value){
+  container.querySelectorAll('.item').forEach(it => it.setAttribute('aria-selected', it.textContent === value ? 'true' : 'false'));
+}
+
+/* select handlers */
+function selectPair(val){
+  pairValue.textContent = val;
+  toggleDropdown(pairList, false);
+  updateSelected(pairList, val);
+  randomizePercentages();
+}
+function selectTF(val){
+  tfValue.textContent = val;
+  metaTF.textContent = val;
+  toggleDropdown(tfList, false);
+  updateSelected(tfList, val);
+  randomizePercentages();
+}
+
+/* formatting to keep comma as in your script */
+function formatPctWithComma(n){
+  return Number(n).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}) + '%';
+}
+
+/* update triangles and badge */
+function updateTriangles(up, down){
+  upText.textContent = formatPctWithComma(up);
+  downText.textContent = formatPctWithComma(down);
+
+  // scale triangles so they feel balanced (range 0.7..1.05)
+  const upScale = 0.7 + (up/100)*0.45;
+  const downScale = 0.7 + (down/100)*0.45;
+
+  upTriContainer.style.transform = `translate(-50%,0) scale(${upScale})`;
+  downTriContainer.style.transform = `translate(-50%,0) scale(${downScale})`;
+
+  // set recommendation
+  if(down > up){
+    recLabel.textContent = 'SELL';
+    recLabel.style.color = getComputedStyle(document.documentElement).getPropertyValue('--tri-red') || '#ef4444';
+  } else {
+    recLabel.textContent = 'BUY';
+    recLabel.style.color = getComputedStyle(document.documentElement).getPropertyValue('--brand-neon') || '#00ff33';
+  }
+
+  const ts = new Date();
+  metaTs.textContent = 'Last update: ' + ts.toLocaleTimeString('en-US');
+}
+
+/* random demo */
+function randomizePercentages(){
+  const a = +(Math.random()*70 + 10).toFixed(2); // roughly 10..80
+  const b = +(100 - a).toFixed(2);
+  updateTriangles(a,b);
+}
+
+/* initial seed */
+updateTriangles(16.45, 83.55);
+
+/* Actions */
+document.getElementById('btnReport').addEventListener('click', ()=> alert('Open report — to be implemented'));
+document.getElementById('btnBroker').addEventListener('click', ()=> alert('Change broker — to be implemented'));
+document.getElementById('btnDownload').addEventListener('click', ()=> {
+  const csv = 'pair,timeframe,up,down\n' + pairValue.textContent + ',' + tfValue.textContent + ',' + upText.textContent + ',' + downText.textContent;
+  const blob = new Blob([csv], {type:'text/csv'}); const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'sheet.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+});
+document.getElementById('btnLogout').addEventListener('click', ()=> alert('Logout — to be implemented'));
+
+/* touch improvements: make dropdowns close on item touchstart quickly */
+document.querySelectorAll('.dropdown .item').forEach(it => {
+  it.addEventListener('touchstart', ()=> { /* noop to ensure :active states on iOS */ }, {passive:true});
+});
+
+/* ---------- particles overlay (lower cost on small screens) ---------- */
+(function createParticles(){
+  const container = document.getElementById('particles');
+  if(!container) return;
+  const small = window.matchMedia('(max-width:560px)').matches;
+  const count = small ? 14 : 36;
+  container.innerHTML = '';
+  for(let i=0;i<count;i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random()*8 + 2;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = (Math.random()*90 + 5) + '%';
+    p.style.top = (Math.random()*80 + 8) + '%';
+    const alpha = 0.03 + Math.random()*0.22;
+    p.style.background = 'rgba(0,255,51,'+alpha+')';
+    p.style.filter = 'blur(' + (1 + Math.random()*6) + 'px)';
+    p.style.opacity = 0.2 + Math.random()*0.8;
+    p.style.position = 'absolute';
+    p.style.borderRadius = '50%';
+    p.style.pointerEvents = 'none';
+    container.appendChild(p);
+    (function animateEl(el){
+      const dur = 6 + Math.random()*20;
+      function tick(){
+        el.style.transform = 'translate(' + ((Math.random()*12)-6) + 'px,' + ((Math.random()*22)-11) + 'px) scale(' + (0.6 + Math.random()*1.1) + ')';
+        el.style.opacity = 0.2 + Math.random()*0.9;
+        setTimeout(tick, dur*1000);
+      }
+      setTimeout(tick, Math.random()*1000);
+    })(p);
+  }
+})();
+
+/* ---------- algorithmic numeric background (canvas) ---------- */
+(function numericCanvas(){
+  const canvas = document.getElementById('algoCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d', { alpha: true });
+  let w=0,h=0, cols=0, colW=14, drops=[];
+  const small = () => window.matchMedia('(max-width:560px)').matches;
+
+  function resize(){
+    const rect = canvas.getBoundingClientRect();
+    w = Math.max(400, Math.floor(rect.width));
+    h = Math.max(220, Math.floor(rect.height));
+    canvas.width = Math.floor(w * devicePixelRatio);
+    canvas.height = Math.floor(h * devicePixelRatio);
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+    // adjust columns based on width (fewer columns on mobile)
+    colW = small() ? 18 : 14;
+    cols = Math.floor(w / colW);
+    drops = new Array(cols).fill(0).map(()=> Math.random() * h * -1);
+  }
+  resize();
+  window.addEventListener('resize', ()=> resize());
+
+  // digits set (feel like algorithm / blurred)
+  const digits = '0123456789';
+  let raf;
+  let last = performance.now();
+
+  function draw(now){
+    const dt = now - last; last = now;
+    // clear with slight transparency to create trailing effect
+    ctx.fillStyle = 'rgba(1,4,6,0.28)';
+    ctx.fillRect(0,0,w,h);
+
+    // draw multiple columns; reduce workload on mobile
+    const step = small() ? 2 : 1;
+    for(let i=0;i<cols;i+=step){
+      const x = i * colW + Math.random()*4;
+      let y = drops[i];
+      // brighter head
+      ctx.font = (small() ? '10px' : '12px') + ' monospace';
+      ctx.textAlign = 'center';
+      const char = digits.charAt(Math.floor(Math.random()*digits.length));
+      // fade tails
+      ctx.fillStyle = 'rgba(0,255,51,0.08)';
+      for(let j=0;j<4;j++){
+        ctx.fillText(digits.charAt(Math.floor(Math.random()*digits.length)), x, y - j*10);
+      }
+      ctx.fillStyle = 'rgba(0,255,51,0.85)';
+      ctx.fillText(char, x, y);
+      drops[i] = y + (2 + Math.random()*8) * (small() ? 0.6 : 1.0);
+      if(drops[i] > h + 60) drops[i] = Math.random() * -150;
+    }
+
+    // subtle blur effect via globalAlpha + compositing not too heavy
+    // schedule next frame
+    raf = requestAnimationFrame(draw);
+  }
+
+  // pause when page hidden
+  document.addEventListener('visibilitychange', ()=> {
+    if(document.hidden) cancelAnimationFrame(raf);
+    else { last = performance.now(); raf = requestAnimationFrame(draw); }
+  });
+
+  raf = requestAnimationFrame(draw);
+})();
+
+/* ---------- small helper: keep triangles balanced on resize ---------- */
+window.addEventListener('resize', ()=> {
+  // clamp scales so triangles don't overflow
+  const nodes = [document.getElementById('upTriContainer'), document.getElementById('downTriContainer')];
+  nodes.forEach(n => {
+    if(!n) return;
+    // ensure transform keeps translate(-50%,0)
+    if(!/translate\(-50%,/.test(n.style.transform)) n.style.transform = 'translate(-50%,0) scale(0.9)';
+  });
+});
+
+/* ---------- friendly initial focus and accessibility ---------- */
+pairSelect.addEventListener('keydown', (e)=> { if(e.key === 'ArrowDown') { pairList.querySelector('.item')?.focus(); } });
+tfSelect.addEventListener('keydown', (e)=> { if(e.key === 'ArrowDown') { tfList.querySelector('.item')?.focus(); } });
+
+/* seed some dynamic updates every few seconds to simulate live feed */
+setInterval(()=> {
+  // do not be too aggressive on mobile
+  if(window.matchMedia('(max-width:420px)').matches) {
+    if(Math.random() < 0.4) randomizePercentages();
+  } else randomizePercentages();
+}, 5200);
+
+/* ensure dropdown list items are clickable after JS created them */
+document.addEventListener('click', (e) => {
+  if(e.target.matches('.dropdown .item')) {
+    // nothing, handlers already present
+  }
+});
 </script>
+
 </body>
 </html>
