@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -11,7 +11,7 @@
   <style>
     :root{
       /* color tuning to better match screenshot neon/greens */
-      --brand-neon:#00ff33;          /* stronger neon */
+      --brand-neon:#00ff33;
       --btn-green:#21C06A;
       --btn-green-dark:#1fbf3b;
       --tri-red:#ef4444;
@@ -19,11 +19,10 @@
       --amber:#f59e0b;
       --muted:#cbd5e1;
       --max-width: 980px;
-      --dropdown-blue-start: #1b2a44; /* blue dropdown like screenshot */
+      --dropdown-blue-start: #1b2a44;
       --dropdown-blue-end: #122034;
     }
 
-    /* Reset-ish */
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -38,7 +37,6 @@
       padding:28px;
     }
 
-    /* card */
     .card {
       width:100%;
       max-width:var(--max-width);
@@ -51,7 +49,6 @@
       min-height:700px;
     }
 
-    /* header */
     header{
       display:flex;
       align-items:center;
@@ -60,22 +57,17 @@
       border-bottom:1px solid rgba(255,255,255,0.03);
       background:linear-gradient(180deg, rgba(2,6,10,0.75), rgba(2,6,10,0.6));
     }
-    .logo {
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
+    .logo { display:flex; gap:12px; align-items:center; }
     .logo img{height:46px; width:auto;}
     .logo .subtitle{font-size:12px; color:var(--muted); letter-spacing:2px}
-    /* LOGO TEXT: heavier neon / stroke to match screenshot more closely */
+
     .logo-text {
       font-family:Orbitron, sans-serif;
       color:var(--brand-neon);
       font-weight:900;
-      font-size:36px;               /* increased size to match screenshot */
+      font-size:36px;
       letter-spacing:2px;
       text-transform:uppercase;
-      /* multi-layer neon glow + thin outer stroke to imitate the thick neon look */
       -webkit-text-stroke: 0.8px rgba(0,0,0,0.55);
       text-shadow:
         0 0 4px rgba(0,255,51,0.85),
@@ -83,19 +75,15 @@
         0 8px 40px rgba(0,0,0,0.6);
       line-height:1;
     }
-    /* small triangular logo mark before text */
     .logo-mark {
-      width:30px;
-      height:30px;
+      width:30px; height:30px;
       display:inline-block;
       background:linear-gradient(180deg,#00ff33,#1fbf3b);
       clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
       box-shadow: 0 0 12px rgba(0,255,51,0.95), 0 6px 16px rgba(0,0,0,0.6);
-      margin-right:6px;
-      border-radius:2px;
+      margin-right:6px; border-radius:2px;
     }
 
-    /* header controls (pair & timeframe boxes) - styled to match screenshot blue rounded boxes */
     .controls{display:flex; gap:12px; align-items:center}
     .select-wrap {
       position:relative;
@@ -109,45 +97,25 @@
     }
     .select-wrap::after{
       content: "▾";
-      position:absolute;
-      right:8px;
-      top:50%;
-      transform:translateY(-50%);
-      color:rgba(255,255,255,0.9);
-      font-size:12px;
-      pointer-events:none;
-      opacity:0.95;
+      position:absolute; right:8px; top:50%; transform:translateY(-50%);
+      color:rgba(255,255,255,0.9); font-size:12px; pointer-events:none; opacity:0.95;
     }
     .select-label{font-size:11px; color:var(--muted); letter-spacing:0.2px; margin-bottom:2px}
     .select-value{font-weight:700; color:#e6f7ff; font-size:14px}
 
-    /* main area */
     main{padding:14px 20px; display:flex; justify-content:center;}
     .main-inner{
-      width:760px;
-      max-width: calc(100% - 40px);
-      background:var(--panel);
-      padding:18px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,0.04);
-      position:relative;
-      margin:0 auto;
-      overflow:visible;
+      width:760px; max-width: calc(100% - 40px);
+      background:var(--panel); padding:18px; border-radius:12px;
+      border:1px solid rgba(255,255,255,0.04); position:relative; margin:0 auto; overflow:visible;
     }
 
-    /* blurred background used under triangles (animated) */
     .bg-blur {
-      position:absolute;
-      inset:0;
-      z-index:-4;
+      position:absolute; inset:0; z-index:-4;
       background-image:url('./assets/bg-blur.jpg');
-      background-size:cover;
-      background-position:center;
+      background-size:cover; background-position:center;
       filter: blur(6px) saturate(125%) contrast(105%);
-      opacity:0.95;
-      transform:scale(1.02);
-      transition:transform 0.6s ease;
-      will-change: transform, background-position;
+      opacity:0.95; transform:scale(1.02);
       animation: slowPan 14s linear infinite;
     }
     @keyframes slowPan {
@@ -155,137 +123,60 @@
       50% { background-position: 52% 54%; transform: scale(1.03) translateY(-8px); }
       100% { background-position: 48% 46%; transform: scale(1.02) translateY(0px); }
     }
-    .bg-overlay{
-      position:absolute; inset:0; z-index:-3; background:linear-gradient(180deg, rgba(2,6,10,0.45), rgba(2,6,10,0.6));
-    }
+    .bg-overlay{ position:absolute; inset:0; z-index:-3; background:linear-gradient(180deg, rgba(2,6,10,0.45), rgba(2,6,10,0.6)); }
 
-    /* particle overlay container */
-    .particles {
-      position:absolute;
-      inset:0;
-      z-index:-2;
-      pointer-events:none;
-      overflow:hidden;
-    }
-    .particle {
-      position:absolute;
-      width:6px;
-      height:6px;
-      border-radius:50%;
-      background:rgba(0,255,51,0.10);
-      filter: blur(6px);
-      box-shadow: 0 0 12px rgba(0,255,51,0.10);
-      opacity:0.85;
-      will-change: transform, opacity;
-    }
+    .particles { position:absolute; inset:0; z-index:-2; pointer-events:none; overflow:hidden; }
+    .particle { position:absolute; width:6px; height:6px; border-radius:50%; background:rgba(0,255,51,0.10); filter: blur(6px); box-shadow: 0 0 12px rgba(0,255,51,0.10); opacity:0.85; }
 
-    /* center column (triangles + buttons) */
     .center-col{display:flex; flex-direction:column; align-items:center; gap:18px}
-
     .triangle-area { width:100%; height:380px; display:flex; align-items:center; justify-content:center; position:relative; overflow:visible; }
 
-    /* triangles - container and svg sizing & positioning refined */
     .up-tri{ position:absolute; top:10px; left:50%; transform-origin:center; transform:translate(-50%,-6px); z-index:8; }
     .down-tri{ position:absolute; left:50%; transform-origin:center; transform:translate(-50%,36px); z-index:12; }
 
-    /* small green glow under the lower triangle to match screenshot */
     .down-glow{
-      position:absolute;
-      width:70px;
-      height:48px;
-      border-radius:50%;
+      position:absolute; width:70px; height:48px; border-radius:50%;
       background: radial-gradient(ellipse at center, rgba(0,255,51,0.95) 0%, rgba(0,255,51,0.35) 20%, rgba(0,255,51,0.06) 60%, rgba(0,0,0,0) 100%);
-      bottom:42%;
-      left:50%;
-      transform:translate(-50%,38%);
-      filter: blur(6px) saturate(120%);
-      z-index:7;
-      pointer-events:none;
+      bottom:42%; left:50%; transform:translate(-50%,38%);
+      filter: blur(6px) saturate(120%); z-index:7; pointer-events:none;
     }
 
-    /* connector line */
     .connector{
-      position:absolute;
-      width:28%;
-      height:6px;
+      position:absolute; width:28%; height:6px;
       background:linear-gradient(90deg, rgba(0,255,51,0.12), rgba(255,255,255,0.03), rgba(239,68,68,0.08));
-      border-radius:6px;
-      top:50%;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.6), inset 0 0 12px rgba(255,255,255,0.02);
-      transform:translateY(-2px);
-      z-index:6;
+      border-radius:6px; top:50%; box-shadow: 0 6px 18px rgba(0,0,0,0.6), inset 0 0 12px rgba(255,255,255,0.02);
+      transform:translateY(-2px); z-index:6;
     }
 
-    /* recommendation badge */
     .rec-badge{
       position:absolute; left:18px; bottom:22px;
       background:linear-gradient(180deg, rgba(3,6,10,0.72), rgba(7,9,12,0.6));
       padding:8px 14px; border-radius:999px; display:flex; gap:8px; align-items:center;
-      border:1px solid rgba(255,255,255,0.05);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.6), 0 0 12px rgba(0,0,0,0.35);
-      z-index:14;
+      border:1px solid rgba(255,255,255,0.05); box-shadow: 0 6px 18px rgba(0,0,0,0.6), 0 0 12px rgba(0,0,0,0.35); z-index:14;
     }
     .rec-badge .rec { font-weight:900; font-size:14px; letter-spacing:0.6px; text-transform:uppercase; }
     .rec-badge .small { font-size:12px; color:var(--muted) }
 
-    /* percent text more bold and Orbitron (bigger weight) */
     .up-tri svg text, .down-tri svg text {
-      font-family: 'Orbitron', sans-serif;
-      font-weight:900;
-      fill:#fff;
-      paint-order:stroke fill;
+      font-family: 'Orbitron', sans-serif; font-weight:900; fill:#fff; paint-order:stroke fill;
     }
 
-    /* buttons vertical */
     .pills{ display:flex; flex-direction:column; gap:12px; align-items:center; margin-top:6px; }
-    .pill {
-      width:220px; min-height:44px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center;
-      font-weight:700; font-size:14px; cursor:pointer; user-select:none;
-      box-shadow:0 8px 20px rgba(0,0,0,0.45);
-      border:1px solid rgba(255,255,255,0.04);
-      text-transform:uppercase;
-    }
+    .pill { width:220px; min-height:44px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; cursor:pointer; user-select:none; box-shadow:0 8px 20px rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.04); text-transform:uppercase; }
     .pill.green{ background:linear-gradient(180deg, var(--btn-green) 0%, var(--btn-green-dark) 95%); color:#071013; }
     .pill.orange{ background:linear-gradient(180deg, #fbbf24 0%, var(--amber) 95%); color:#071013; width:140px; }
 
-    .pill:focus{ outline: none; box-shadow: 0 0 0 6px rgba(33,192,106,0.14); }
-    .pill:active{ transform: translateY(1px) }
-
-    /* footer locale */
     .footer { display:flex; justify-content:flex-end; padding:10px 20px; border-top:1px solid rgba(255,255,255,0.02); align-items:center; position:relative; z-index:4; }
     .flag { width:36px; height:22px; background-image:url('./assets/en-flag.png'); background-size:cover; border-radius:4px; border:1px solid rgba(0,0,0,0.2); }
 
-    /* dropdown list */
-    .dropdown {
-      position:absolute; top:calc(100% + 8px); left:0;
-      background:#06111a; border-radius:8px; padding:6px; display:none;
-      box-shadow:0 8px 30px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.03);
-      z-index:40; min-width:160px;
-    }
+    .dropdown { position:absolute; top:calc(100% + 8px); left:0; background:#06111a; border-radius:8px; padding:6px; display:none; box-shadow:0 8px 30px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.03); z-index:40; min-width:160px; }
     .dropdown.show{ display:block; }
     .dropdown .item{ padding:8px 10px; border-radius:6px; color:#e6eef6; font-weight:600; cursor:pointer; }
     .dropdown .item:hover, .dropdown .item[aria-selected="true"]{ background: rgba(255,255,255,0.03); }
 
-    /* optional left panel to match screenshot */
-    aside.left-panel{
-      width:260px;
-      position:absolute;
-      left:0;
-      top:74px;
-      bottom:56px;
-      background:linear-gradient(180deg,#0b1220,#07101a);
-      border-right:1px solid rgba(255,255,255,0.03);
-      padding:12px;
-      border-top-left-radius:18px;
-      border-bottom-left-radius:18px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      z-index:6;
-    }
+    aside.left-panel{ width:260px; position:absolute; left:0; top:74px; bottom:56px; background:linear-gradient(180deg,#0b1220,#07101a); border-right:1px solid rgba(255,255,255,0.03); padding:12px; border-top-left-radius:18px; border-bottom-left-radius:18px; display:flex; flex-direction:column; gap:10px; z-index:6; }
     aside.left-panel .item{ background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.01)); padding:8px 10px; border-radius:8px; color:#dfeaf0; font-weight:600; }
 
-    /* responsive */
     @media (max-width:820px){
       .main-inner{ width:94% }
       .triangle-area{ height:320px }
@@ -294,7 +185,6 @@
       .logo-text{ font-size:28px; }
     }
 
-    /* animations: subtle pulse glow */
     @keyframes pulseGlow {
       0% { filter: drop-shadow(0 0 6px rgba(0,255,51,0.25)); transform: translateY(0) scale(1); }
       50% { filter: drop-shadow(0 0 22px rgba(0,255,51,0.36)); transform: translateY(-2px) scale(1.02); }
@@ -303,13 +193,11 @@
     .up-tri svg, .down-tri svg { transition: transform .28s ease; }
     .up-tri { animation: pulseGlow 2.6s infinite ease-in-out; transform-origin:center; }
     .down-tri { animation: pulseGlow 3.0s infinite ease-in-out; transform-origin:center; }
-
   </style>
 </head>
 <body>
 
   <div class="card" role="application" aria-label="ASTRONBOT.MAX interface clone">
-    <!-- left panel (to match screenshot) -->
     <aside class="left-panel" aria-hidden="false" aria-label="Market panel">
       <div style="color:var(--muted); font-size:13px; margin-bottom:6px;">Market Prices</div>
       <div class="item">1160.50</div>
@@ -321,10 +209,8 @@
       <div class="item">1145.80</div>
     </aside>
 
-    <!-- header -->
     <header>
       <div class="logo" style="gap:12px;">
-        <!-- optional PNG logo; if not present the text + mark will render -->
         <img src="./assets/logo-astronbot.png" alt="ASTRONBOT.MAX logo" onerror="this.style.display='none'">
         <div style="display:flex; align-items:center;">
           <span class="logo-mark" aria-hidden="true"></span>
@@ -350,7 +236,6 @@
       </div>
     </header>
 
-    <!-- main -->
     <main>
       <div class="main-inner" role="main">
         <div class="bg-blur" aria-hidden="true"></div>
@@ -359,16 +244,12 @@
 
         <div class="center-col">
           <div class="triangle-area" aria-hidden="false">
-            <!-- Up triangle -->
             <div class="up-tri" style="z-index:10;">
               <svg viewBox="0 0 100 100" width="180" height="180" aria-hidden="true">
                 <defs>
                   <filter id="glowGreen" x="-50%" y="-50%" width="200%" height="200%">
                     <feGaussianBlur stdDeviation="6" result="b"/>
-                    <feMerge>
-                      <feMergeNode in="b"/>
-                      <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
                   </filter>
                 </defs>
                 <polygon points="50,6 95,86 5,86" fill="#00d64a" filter="url(#glowGreen)"></polygon>
@@ -378,16 +259,12 @@
 
             <div class="connector" aria-hidden="true"></div>
 
-            <!-- Down triangle -->
             <div class="down-tri" style="z-index:12;">
               <svg viewBox="0 0 100 100" width="260" height="260" aria-hidden="true">
                 <defs>
                   <filter id="glowRed" x="-50%" y="-50%" width="200%" height="200%">
                     <feGaussianBlur stdDeviation="5" result="b"/>
-                    <feMerge>
-                      <feMergeNode in="b"/>
-                      <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
                   </filter>
                 </defs>
                 <polygon points="50,95 95,15 5,15" fill="#ef4444" filter="url(#glowRed)"></polygon>
@@ -395,22 +272,18 @@
               </svg>
             </div>
 
-            <!-- green glow under lower triangle to match screenshot -->
             <div class="down-glow" aria-hidden="true"></div>
 
-            <!-- recommendation badge -->
             <div class="rec-badge" role="status" aria-live="polite">
               <div class="rec" id="recLabel" style="color:var(--tri-red)">SELL</div>
               <div class="small">Confidence</div>
             </div>
           </div>
 
-          <!-- microcopy -->
           <div style="max-width:640px;text-align:center;color:var(--muted);font-size:13px;">
             Percentages estimated by the model — window: <span id="metaTF">M1</span> — <span id="metaTs">Last update: —</span>
           </div>
 
-          <!-- pills -->
           <div class="pills" role="toolbar" aria-label="Actions">
             <button class="pill green" id="btnReport">OPEN REPORT</button>
             <button class="pill green" id="btnBroker">CHANGE BROKER</button>
@@ -423,7 +296,6 @@
       </div>
     </main>
 
-    <!-- footer -->
     <div class="footer">
       <div style="display:flex;align-items:center;gap:8px;">
         <div class="flag" role="img" aria-label="English / United States"></div>
@@ -434,11 +306,20 @@
   </div>
 
 <script>
-  // CONFIG: available pairs and timeframes (kept exactly as requested)
+  // CONFIG: pairs and timeframes (exactly as requested)
   const pairs = ['NZDCAD','EURUSD','GBPUSD','USDJPY','AUDUSD','USDCAD','EURJPY','BTCUSD'];
   const timeframes = ['M1','M5','M15','M30','H1','H4','D1'];
 
-  // Populate dropdowns
+  // DOM refs
+  const pairSelect = document.getElementById('pairSelect');
+  const pairValue = document.getElementById('pairValue');
+  const pairList = document.getElementById('pairList');
+
+  const tfSelect = document.getElementById('tfSelect');
+  const tfValue = document.getElementById('tfValue');
+  const tfList = document.getElementById('tfList');
+
+  // populate helper
   function buildList(container, items, onSelect){
     container.innerHTML = '';
     items.forEach((it)=>{
@@ -456,14 +337,6 @@
     });
   }
 
-  const pairSelect = document.getElementById('pairSelect');
-  const pairValue = document.getElementById('pairValue');
-  const pairList = document.getElementById('pairList');
-
-  const tfSelect = document.getElementById('tfSelect');
-  const tfValue = document.getElementById('tfValue');
-  const tfList = document.getElementById('tfList');
-
   buildList(pairList, pairs, (v)=> selectPair(v));
   buildList(tfList, timeframes, (v)=> selectTF(v));
 
@@ -480,6 +353,7 @@
     document.querySelectorAll('.dropdown').forEach(d=> d.classList.remove('show'));
     document.querySelectorAll('.select-wrap').forEach(s=> s.setAttribute('aria-expanded','false'));
   }
+
   function selectPair(val){
     pairValue.textContent = val;
     toggleDropdown(pairList, false);
@@ -499,6 +373,7 @@
       if(it.textContent === value) it.setAttribute('aria-selected','true'); else it.setAttribute('aria-selected','false');
     });
   }
+
   function attachSelectHandlers(wrap, list){
     wrap.addEventListener('click', (e)=>{
       const isShown = list.classList.contains('show');
@@ -526,7 +401,7 @@
     if(e.key === 'Escape') closeAllDropdowns();
   });
 
-  // Percent formatting with comma (pt-BR style) to match screenshot decimals
+  // Percent formatting with comma (pt-BR style)
   function formatPctWithComma(n){
     return Number(n).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}) + '%';
   }
@@ -550,7 +425,7 @@
     document.getElementById('metaTs').textContent = 'Last update: ' + ts.toLocaleTimeString('en-US');
   }
 
-  // Demo randomizer (replace with live data feed as needed)
+  // Demo randomizer (replace with live feed)
   function randomizePercentages(){
     const a = Math.round(Math.random()*85 + 5); // 5..90
     const b = 100 - a;
@@ -560,7 +435,7 @@
   // initial seed
   updateTriangles(16.45, 83.55);
 
-  // Action buttons (placeholders)
+  // Buttons
   document.getElementById('btnReport').addEventListener('click', ()=> alert('Open report — to be implemented'));
   document.getElementById('btnBroker').addEventListener('click', ()=> alert('Change broker — to be implemented'));
   document.getElementById('btnDownload').addEventListener('click', ()=> {
@@ -571,13 +446,11 @@
   });
   document.getElementById('btnLogout').addEventListener('click', ()=> alert('Logout — to be implemented'));
 
-  // -------------------------
   // Animated particle overlay
-  // -------------------------
   (function createParticles(){
     const container = document.getElementById('particles');
     if(!container) return;
-    const count = 34; // increased to better match screenshot speckle
+    const count = 34;
     for(let i=0;i<count;i++){
       const p = document.createElement('div');
       p.className = 'particle';
@@ -605,28 +478,26 @@
     }
   })();
 
-  // keep particles reflow on resize
+  // Recreate particles on resize
   window.addEventListener('resize', ()=> {
     const container = document.getElementById('particles');
     if(!container) return;
     container.innerHTML = '';
-    (function createAgain(){
-      const count = 34;
-      for(let i=0;i<count;i++){
-        const p = document.createElement('div');
-        p.className = 'particle';
-        const size = Math.random()*8 + 2;
-        p.style.width = size + 'px';
-        p.style.height = size + 'px';
-        p.style.left = Math.random()*100 + '%';
-        p.style.top = Math.random()*100 + '%';
-        const alpha = 0.05 + Math.random()*0.18;
-        p.style.background = 'rgba(0,255,51,'+alpha+')';
-        p.style.filter = 'blur(' + (2 + Math.random()*6) + 'px)';
-        p.style.transition = 'transform ' + (8 + Math.random()*18) + 's linear';
-        container.appendChild(p);
-      }
-    })();
+    const count = 34;
+    for(let i=0;i<count;i++){
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random()*8 + 2;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left = Math.random()*100 + '%';
+      p.style.top = Math.random()*100 + '%';
+      const alpha = 0.05 + Math.random()*0.18;
+      p.style.background = 'rgba(0,255,51,'+alpha+')';
+      p.style.filter = 'blur(' + (2 + Math.random()*6) + 'px)';
+      p.style.transition = 'transform ' + (8 + Math.random()*18) + 's linear';
+      container.appendChild(p);
+    }
   });
 
   // Accessibility: close dropdowns when focus moves outside
