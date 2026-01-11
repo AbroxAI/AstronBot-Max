@@ -3,106 +3,101 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>ASTRONBOT.MAX — Deep Clone</title>
+<title>ASTRONBOT.MAX — Deep Clone (final)</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    --neon-green:#00ff33;
-    --neon-green-2:#17d24a;
-    --neo-red:#e33b3b;
-    --panel:#02060a;
-    --muted:#cbd5e1;
-    --max-width:1100px;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:#000;}
-  /* Make the UI full-bleed on small devices to avoid edges */
-  .wrap{
-    min-height:100vh;
-    display:flex; align-items:center; justify-content:center; padding:18px;
-  }
-  .card{
-    width:100%; max-width:var(--max-width);
-    border-radius:14px; overflow:visible; position:relative;
-    background:linear-gradient(180deg, rgba(1,6,10,0.9), rgba(2,8,12,0.98));
-    border:1px solid rgba(255,255,255,0.03);
-    box-shadow:0 18px 60px rgba(0,0,0,0.75);
-  }
+:root{
+  --neon-green:#00ff33;
+  --neon-green-2:#17d24a;
+  --neo-red:#e33b3b;
+  --panel:#02060a;
+  --muted:#cbd5e1;
+  --max-width:1100px;
+  --glass: rgba(255,255,255,0.04);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:#000;}
+.wrap{ min-height:100vh; display:flex; align-items:center; justify-content:center; padding:18px; }
+.card{ width:100%; max-width:var(--max-width); border-radius:14px; overflow:visible; position:relative; background:linear-gradient(180deg, rgba(1,6,10,0.9), rgba(2,8,12,0.98)); border:1px solid var(--glass); box-shadow:0 18px 60px rgba(0,0,0,0.75); }
 
-  header{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:12px 18px; z-index:60; position:relative;
-    background:linear-gradient(180deg, rgba(2,6,10,0.85), rgba(2,6,10,0.5));
-  }
-  .left-header{display:flex; align-items:center; gap:12px; min-width:0;}
-  .logo-mark{width:38px;height:38px; background:linear-gradient(180deg,var(--neon-green),var(--neon-green-2)); clip-path:polygon(50% 0%,100% 100%,0% 100%); box-shadow:0 0 18px rgba(0,255,51,0.95);}
-  .brand{display:flex;flex-direction:column;min-width:0;}
-  .brand-top{display:flex;align-items:center;gap:12px}
-  .brand-text{
-    font-family:Orbitron, sans-serif; color:var(--neon-green); font-weight:900;
-    font-size:clamp(20px,5.1vw,48px); letter-spacing:1px; text-transform:uppercase;
-    text-shadow:0 0 10px rgba(0,255,51,0.85),0 12px 36px rgba(0,0,0,0.6);
-  }
-  .subtitle{font-size:11px;color:var(--muted);letter-spacing:1.6px;margin-left:2px}
+header{ display:flex; justify-content:space-between; align-items:center; padding:12px 18px; z-index:60; position:relative; background:linear-gradient(180deg, rgba(2,6,10,0.85), rgba(2,6,10,0.5)); }
+.left-header{display:flex; align-items:center; gap:12px; min-width:0;}
+.logo-mark{width:38px;height:38px; background:linear-gradient(180deg,var(--neon-green),var(--neon-green-2)); clip-path:polygon(50% 0%,100% 100%,0% 100%); box-shadow:0 0 18px rgba(0,255,51,0.95);}
+.brand{display:flex;flex-direction:column;min-width:0;}
+.brand-top{display:flex;align-items:center;gap:12px}
+.brand-text{ font-family:Orbitron, sans-serif; color:var(--neon-green); font-weight:900; font-size:clamp(20px,5.1vw,48px); letter-spacing:1px; text-transform:uppercase; text-shadow:0 0 10px rgba(0,255,51,0.85),0 12px 36px rgba(0,0,0,0.6); }
+.subtitle{font-size:11px;color:var(--muted);letter-spacing:1.6px;margin-left:2px}
 
-  .controls { display:flex; gap:12px; align-items:center; z-index:70; }
+.controls { display:flex; gap:12px; align-items:center; z-index:70; }
 
-  .select{
-    background:linear-gradient(180deg,#132733,#0e1a28); padding:8px 12px; border-radius:10px;
-    border:1px solid rgba(255,255,255,0.03); min-width:110px; color:#e8fbff; cursor:pointer;
-  }
-  .select .label{font-size:11px;color:var(--muted); display:block}
-  .select .value{font-weight:800; font-size:14px}
+.select{ background:linear-gradient(180deg,#132733,#0e1a28); padding:8px 12px; border-radius:10px; border:1px solid var(--glass); min-width:110px; color:#e8fbff; cursor:pointer; -webkit-tap-highlight-color: transparent; }
+.select .label{font-size:11px;color:var(--muted); display:block}
+.select .value{font-weight:800; font-size:14px}
 
-  /* MAIN area */
-  main{position:relative; padding:14px 18px;}
-  .main-inner{ position:relative; border-radius:12px; overflow:hidden; background:linear-gradient(180deg, rgba(0,0,0,0.36), rgba(0,0,0,0.45)); min-height:680px; }
+main{position:relative; padding:14px 18px;}
+.main-inner{ position:relative; border-radius:12px; overflow:hidden; background:linear-gradient(180deg, rgba(0,0,0,0.36), rgba(0,0,0,0.45)); min-height:680px; }
 
-  /* full-cover algorithmic background that covers entire card */
-  .bg-wrap{ position:absolute; inset:0; z-index:0; overflow:hidden; }
-  #algoCanvas{ position:absolute; top:0; left:0; width:100%; height:100%; display:block; object-fit:cover; filter: blur(5px) saturate(140%); transform:scale(1.02); }
-  /* very dark overlay to match screenshot's contrast */
-  .bg-overlay{ position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(2,6,10,0.46), rgba(3,8,12,0.66)); }
+/* full-cover animated background */
+.bg-wrap{ position:absolute; inset:0; z-index:0; overflow:hidden; }
+#algoCanvas{ position:absolute; top:0; left:0; width:100%; height:100%; display:block; object-fit:cover; filter: blur(4px) saturate(150%); transform:scale(1.02); }
+.bg-overlay{ position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(2,6,10,0.28), rgba(2,6,10,0.56)); }
 
-  /* center column above background */
-  .center{ position:relative; z-index:12; display:flex; align-items:center; flex-direction:column; gap:18px; padding:32px 10px; }
+/* subtle bokeh glows */
+.bokeh { position:absolute; border-radius:50%; filter: blur(18px) saturate(160%); opacity:0.75; mix-blend-mode:screen; z-index:0; pointer-events:none; }
 
-  .triangle-area{ width:100%; max-width:680px; height:410px; display:flex; align-items:center; justify-content:center; position:relative; }
+/* center column above background */
+.center{ position:relative; z-index:12; display:flex; align-items:center; flex-direction:column; gap:18px; padding:32px 10px; }
 
-  /* Triangles: precise sizing and balancing */
-  .up-tri, .down-tri { position:absolute; left:50%; transform-origin:center; transition: transform .45s cubic-bezier(.22,.98,.33,1), opacity .25s ease; }
-  .up-tri{ top:14%; transform:translateX(-50%) scale(0.98); z-index:8; }
-  .down-tri{ top:36%; transform:translateX(-50%) scale(1); z-index:10; }
+.triangle-area{ width:100%; max-width:680px; height:410px; display:flex; align-items:center; justify-content:center; position:relative; }
 
-  svg text{ font-family:Orbitron, monospace; font-weight:900; fill:#fff; paint-order:stroke fill; }
+/* Triangles */
+.up-tri, .down-tri { position:absolute; left:50%; transform-origin:center; transition: transform .45s cubic-bezier(.22,.98,.33,1), opacity .25s ease; }
+.up-tri{ top:14%; transform:translateX(-50%) scale(0.98); z-index:8; }
+.down-tri{ top:36%; transform:translateX(-50%) scale(1); z-index:10; }
 
-  .connector { position:absolute; top:50%; left:50%; transform:translate(-50%,-2px); width:36%; height:6px; border-radius:6px; z-index:6; background:linear-gradient(90deg, rgba(0,255,51,0.12), rgba(255,255,255,0.03), rgba(227,59,59,0.06)); box-shadow:0 10px 30px rgba(0,0,0,0.6); }
+svg text{ font-family:Orbitron, monospace; font-weight:900; fill:#fff; paint-order:stroke fill; }
 
-  .down-glow{ position:absolute; width:86px;height:46px;border-radius:50%; background:radial-gradient(circle at center, rgba(0,255,51,0.98) 0%, rgba(0,255,51,0.28) 25%, rgba(0,0,0,0) 65%); bottom:22%; left:50%; transform:translateX(-50%); filter:blur(6px); z-index:7; }
+.connector { position:absolute; top:50%; left:50%; transform:translate(-50%,-2px); width:36%; height:6px; border-radius:6px; z-index:6; background:linear-gradient(90deg, rgba(0,255,51,0.12), rgba(255,255,255,0.03), rgba(227,59,59,0.06)); box-shadow:0 10px 30px rgba(0,0,0,0.6); }
 
-  .rec-badge{ position:absolute; left:18px; bottom:22px; z-index:14; background:linear-gradient(180deg, rgba(3,6,10,0.72), rgba(7,9,12,0.6)); padding:8px 14px; border-radius:999px; border:1px solid rgba(255,255,255,0.04); display:flex; gap:8px; align-items:center; }
+.down-glow{ position:absolute; width:86px;height:46px;border-radius:50%; background:radial-gradient(circle at center, rgba(0,255,51,0.98) 0%, rgba(0,255,51,0.28) 25%, rgba(0,0,0,0) 65%); bottom:22%; left:50%; transform:translateX(-50%); filter:blur(6px); z-index:7; }
 
-  .meta{ color:var(--muted); font-size:13px }
+.rec-badge{ position:absolute; left:18px; bottom:22px; z-index:14; background:linear-gradient(180deg, rgba(3,6,10,0.72), rgba(7,9,12,0.6)); padding:8px 14px; border-radius:999px; border:1px solid rgba(255,255,255,0.04); display:flex; gap:8px; align-items:center; }
 
-  .pills{ margin-top:8px; display:flex; flex-direction:column; gap:12px; align-items:center; z-index:14; }
-  .pill{ width:220px; padding:12px; border-radius:999px; font-weight:800; font-size:13px; text-transform:uppercase; cursor:pointer; border:1px solid rgba(255,255,255,0.04); box-shadow:0 10px 30px rgba(0,0,0,0.5); }
-  .pill.green{ background:linear-gradient(180deg,var(--neon-green-2),var(--neon-green)); color:#071012; }
-  .pill.orange{ background:linear-gradient(180deg,#fbbf24,#f59e0b); color:#071012; width:150px; }
+.meta{ color:var(--muted); font-size:13px }
 
-  /* small-screen: cover entire viewport, hide card edges (user wanted no visible edges) */
-  @media (max-width:760px){
-    .wrap{ padding:0; }
-    .card{ border-radius:0; max-width:100%; min-height:100vh; box-shadow:none; }
-    header{ padding:14px; }
-    .main-inner{ min-height:calc(100vh - 120px); }
-  }
+.pills{ margin-top:8px; display:flex; flex-direction:column; gap:12px; align-items:center; z-index:14; }
+.pill{ width:220px; padding:12px; border-radius:999px; font-weight:800; font-size:13px; text-transform:uppercase; cursor:pointer; border:1px solid rgba(255,255,255,0.04); box-shadow:0 10px 30px rgba(0,0,0,0.5); }
+.pill.green{ background:linear-gradient(180deg,var(--neon-green-2),var(--neon-green)); color:#071012; }
+.pill.orange{ background:linear-gradient(180deg,#fbbf24,#f59e0b); color:#071012; width:150px; }
+
+/* premium modal */
+.modal-backdrop{ position:fixed; inset:0; z-index:1200; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); }
+.modal{ width:92%; max-width:520px; background:linear-gradient(180deg,#081018,#061016); border-radius:12px; padding:20px; box-shadow:0 24px 80px rgba(0,0,0,0.8); border:1px solid rgba(255,255,255,0.03); color:#eaf6ff; }
+.modal h2{ margin:0 0 8px 0; font-family:Orbitron, sans-serif; color:var(--neon-green); letter-spacing:1px; font-size:20px; }
+.modal p{ color:var(--muted); margin:0 0 16px 0; line-height:1.35; }
+.modal .actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:14px; }
+.btn{ padding:10px 14px; border-radius:10px; font-weight:800; cursor:pointer; border:0; }
+.btn.ghost{ background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.04); }
+.btn.primary{ background:linear-gradient(180deg,var(--neon-green-2),var(--neon-green)); color:#071012; }
+
+/* responsive full-bleed on small screens */
+@media (max-width:760px){
+  .wrap{ padding:0; }
+  .card{ border-radius:0; max-width:100%; min-height:100vh; box-shadow:none; }
+  header{ padding:14px; }
+  .main-inner{ min-height:calc(100vh - 120px); }
+}
+
+/* spinner */
+@keyframes spin { to { transform: rotate(360deg);} }
+.spinner { width:44px; height:44px; border-radius:50%; border:4px solid rgba(255,255,255,0.12); border-top-color:var(--neon-green); animation:spin 0.9s linear infinite; }
 </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="card" role="application" aria-label="ASTRONBOT.MAX deep clone">
+    <div class="card" role="application" aria-label="ASTRONBOT.MAX final clone">
       <header>
         <div class="left-header">
           <div class="logo-mark" aria-hidden="true"></div>
@@ -129,24 +124,29 @@
 
       <main>
         <div class="main-inner">
-          <!-- full cover animated numeric background (canvas) -->
+          <!-- background -->
           <div class="bg-wrap" aria-hidden="true">
             <canvas id="algoCanvas"></canvas>
             <div class="bg-overlay" aria-hidden="true"></div>
+
+            <!-- bokeh glows to match screenshot floating neon spots -->
+            <div id="b1" class="bokeh" style="width:220px;height:220px;background:radial-gradient(circle at center, rgba(0,255,51,0.9), rgba(0,255,51,0.12)); left:8%; top:12%; opacity:0.35;"></div>
+            <div id="b2" class="bokeh" style="width:200px;height:200px;background:radial-gradient(circle at center, rgba(20,200,255,0.85), rgba(20,200,255,0.06)); right:8%; top:22%; opacity:0.12;"></div>
+            <div id="b3" class="bokeh" style="width:140px;height:140px;background:radial-gradient(circle at center, rgba(0,255,51,0.95), rgba(0,255,51,0.12)); left:40%; bottom:18%; opacity:0.28;"></div>
           </div>
 
-          <!-- dropdown containers (positioned over header controls when opened) -->
-          <div id="dropdowns" style="position:absolute; top:84px; right:22px; z-index:80; pointer-events:none;"></div>
+          <!-- dropdowns container -->
+          <div id="dropdowns" style="position:absolute; top:84px; right:22px; z-index:200;"></div>
 
           <div class="center">
-            <div class="triangle-area">
+            <div class="triangle-area" aria-hidden="false">
               <div class="up-tri" id="upTri">
                 <svg viewBox="0 0 100 100" width="180" height="180" aria-hidden="true">
                   <defs>
                     <filter id="gA" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
                   </defs>
                   <polygon id="upPoly" points="50,6 95,86 5,86" fill="#00d64a" filter="url(#gA)"></polygon>
-                  <text id="upText" x="50" y="62" text-anchor="middle" font-size="18" fill="#fff" style="font-family:Orbitron, sans-serif">16,45%</text>
+                  <text id="upText" x="50" y="62" text-anchor="middle" font-size="18" fill="#fff" style="font-family:Orbitron, sans-serif; pointer-events:none"></text>
                 </svg>
               </div>
 
@@ -158,13 +158,13 @@
                     <filter id="gB" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
                   </defs>
                   <polygon id="downPoly" points="50,95 95,15 5,15" fill="#ef4444" filter="url(#gB)"></polygon>
-                  <text id="downText" x="50" y="56" text-anchor="middle" font-size="22" fill="#fff" style="font-family:Orbitron, sans-serif">83,55%</text>
+                  <text id="downText" x="50" y="56" text-anchor="middle" font-size="22" fill="#fff" style="font-family:Orbitron, sans-serif; pointer-events:none"></text>
                 </svg>
               </div>
 
               <div class="down-glow" aria-hidden="true"></div>
 
-              <div class="rec-badge"><div class="rec" id="rec">SELL</div><div class="small">Confidence</div></div>
+              <div class="rec-badge" id="recBadge" aria-hidden="false"><div class="rec" id="rec">LOCKED</div><div class="small" id="recSmall">Subscribe to unlock</div></div>
             </div>
 
             <div class="meta">Percentages estimated by the model — window: <span id="metaTF">M1</span> — <span id="metaTs">Last update: —</span></div>
@@ -181,15 +181,27 @@
     </div>
   </div>
 
-<script>
-/* ========================
-   Deep clone behaviour JS
-   - full background canvas (cover)
-   - dropdowns with callback lock to avoid distraction
-   - triangles balanced & animated based on percentages
-   ======================== */
+  <!-- Premium modal (hidden by default) -->
+  <div id="premiumModal" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal-backdrop">
+      <div class="modal" role="document">
+        <h2>Premium required</h2>
+        <p><strong>Why this is premium:</strong> The detailed percentage readouts, downloadable reports and change-broker actions depend on our real-time model and protected reporting — we lock them to keep signal integrity and provide a premium experience. Subscribing unlocks precise percentages, real-time alerts, export and priority support. This reduces noise, prevents misuse, and ensures only serious users access fine-grained signals.</p>
+        <p style="margin-top:6px;color:var(--muted)">Subscribe to unlock:<br>• Real-time percentages and buying/selling confidence<br>• Downloadable reports & sheets<br>• Broker integration and premium analytics</p>
+        <div class="actions">
+          <button class="btn ghost" id="modalLater">Maybe later</button>
+          <button class="btn primary" id="modalSubscribe">Subscribe (demo)</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-/* --------- configuration --------- */
+<script>
+/* ======= Finalized script ======= */
+/* subscription flag: change to true for testing unlocked UI */
+let isSubscribed = false; // default locked for demo
+
+/* config */
 const pairs = ['NZDCAD','EURUSD','GBPUSD','USDJPY','AUDUSD','USDCAD','EURJPY','BTCUSD','ETHUSD','XAUUSD'];
 const timeframes = ['M1','M5','M15','M30','H1','H4','D1'];
 
@@ -204,59 +216,83 @@ const upText = document.getElementById('upText');
 const downText = document.getElementById('downText');
 const upTri = document.getElementById('upTri');
 const downTri = document.getElementById('downTri');
-const rec = document.getElementById('rec');
+const recEl = document.getElementById('rec');
+const recSmall = document.getElementById('recSmall');
 const metaTF = document.getElementById('metaTF');
 const metaTs = document.getElementById('metaTs');
 
-/* ---------- helper: format with comma like screenshot ---------- */
+const premiumModal = document.getElementById('premiumModal');
+const modalSubscribe = document.getElementById('modalSubscribe');
+const modalLater = document.getElementById('modalLater');
+
+const btnReport = document.getElementById('btnReport');
+const btnBroker = document.getElementById('btnBroker');
+const btnDownload = document.getElementById('btnDownload');
+const btnLogout = document.getElementById('btnLogout');
+
+/* helper format */
 function formatPct(n){
   return Number(n).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}) + '%';
 }
 
-/* ---------- triangle balancing: scale + vertical offset by percent ----------
-   - upScale and downScale are clamped to keep visual balance like screenshot
-   - also compute vertical offsets so triangles appear stacked with a gap
-*/
+/* set triangles: sizes computed, numbers visible only if subscribed */
 function setTriangles(up, down){
-  // clamp percent into 0..100
-  up = Math.max(0, Math.min(100, up));
-  down = Math.max(0, Math.min(100, down));
-  upText.textContent = formatPct(up);
-  downText.textContent = formatPct(down);
+  up = Math.max(0, Math.min(100, up)); down = Math.max(0, Math.min(100, down));
 
-  // scale mapping (visual)
-  const upScale = 0.75 + (up/100) * 0.5;    // 0.75 .. 1.25
-  const downScale = 0.75 + (down/100) * 0.55; // 0.75 .. 1.3
+  // show numbers only if subscribed
+  if(isSubscribed){
+    upText.textContent = formatPct(up);
+    downText.textContent = formatPct(down);
+  } else {
+    upText.textContent = '';
+    downText.textContent = '';
+  }
 
-  // vertical offset so bigger triangle sits naturally (px values tuned by sight)
-  const upOffset = - Math.min(36, (up/100)*42);   // move a bit up when larger
-  const downOffset = Math.min(18, (down/100)*32); // move a bit down when larger
+  // Balanced scale mapping: smaller max to avoid one triangle swallowing the other
+  // Visual mapping tuned to look balanced like the original screenshot.
+  const minScale = 0.86;
+  const maxExtra = 0.36; // how much scale can increase based on % (keeps triangles balanced)
+  const upScale = minScale + (up/100) * maxExtra;
+  const downScale = minScale + (down/100) * maxExtra;
+
+  // vertical offsets tuned to keep the gap between triangles
+  const upOffset = - Math.min(34, (up/100)*36);
+  const downOffset = Math.min(20, (down/100)*32);
 
   upTri.style.transform = `translate(-50%, ${upOffset}px) scale(${upScale})`;
   downTri.style.transform = `translate(-50%, ${downOffset}px) scale(${downScale})`;
 
-  // recommendation
-  if(down > up){
-    rec.textContent = 'SELL';
-    rec.style.color = getComputedStyle(document.documentElement).getPropertyValue('--neo-red') || '#e33b3b';
+  // recommendation text behaviour:
+  if(isSubscribed){
+    if(down > up){
+      recEl.textContent = 'SELL';
+      recEl.style.color = getComputedStyle(document.documentElement).getPropertyValue('--neo-red') || '#e33b3b';
+      recSmall.textContent = 'Confidence';
+    } else {
+      recEl.textContent = 'BUY';
+      recEl.style.color = getComputedStyle(document.documentElement).getPropertyValue('--neon-green') || '#00ff33';
+      recSmall.textContent = 'Confidence';
+    }
   } else {
-    rec.textContent = 'BUY';
-    rec.style.color = getComputedStyle(document.documentElement).getPropertyValue('--neon-green') || '#00ff33';
+    // locked messaging
+    recEl.textContent = 'LOCKED';
+    recEl.style.color = getComputedStyle(document.documentElement).getPropertyValue('--neon-green') || '#00ff33';
+    recSmall.textContent = 'Subscribe to unlock';
   }
 
   metaTs.textContent = 'Last update: ' + new Date().toLocaleTimeString('en-US');
 }
 
-/* ---------- initial seed ---------- */
+/* initial */
 setTriangles(16.45, 83.55);
 
-/* ---------- create dropdown UI (floating near controls) ---------- */
-function createDropdown(x, y, items, onSelect){
-  // pointer-events enabled only when open
+/* ========== Dropdown helpers (robust) ========== */
+function createDropdownShell(){
   const box = document.createElement('div');
+  box.className = 'dd-box';
   box.style.position = 'absolute';
-  box.style.minWidth = '180px';
-  box.style.right = '22px';
+  box.style.minWidth = '200px';
+  box.style.right = (window.innerWidth < 760 ? '12px' : '22px');
   box.style.top = '0px';
   box.style.pointerEvents = 'auto';
   box.style.background = 'linear-gradient(180deg,#071627,#03121a)';
@@ -264,21 +300,35 @@ function createDropdown(x, y, items, onSelect){
   box.style.padding = '8px';
   box.style.borderRadius = '10px';
   box.style.boxShadow = '0 10px 40px rgba(0,0,0,0.6)';
-  box.style.zIndex = 200;
+  box.style.zIndex = 9999;
 
-  // search
   const search = document.createElement('input');
+  search.className = 'dd-search';
   search.placeholder = 'Search...';
   search.style.width='100%'; search.style.marginBottom='8px'; search.style.padding='8px'; search.style.borderRadius='8px';
   search.style.border='1px solid rgba(255,255,255,0.03)'; search.style.background='rgba(255,255,255,0.02)'; search.style.color='#eaf6ff';
   box.appendChild(search);
 
   const list = document.createElement('div');
+  list.className = 'dd-list';
   list.style.maxHeight='300px'; list.style.overflow='auto'; list.style.webkitOverflowScrolling='touch';
-  items.forEach(it=>{
+  box.appendChild(list);
+
+  box.close = ()=> { if(box.parentNode) box.parentNode.removeChild(box); };
+  return box;
+}
+
+function buildDropdownContents(box, items, onSelect){
+  if(!box) return;
+  const search = box.querySelector('.dd-search');
+  const list = box.querySelector('.dd-list');
+  if(!search || !list) return;
+  list.innerHTML = '';
+  items.forEach(it => {
     const item = document.createElement('div');
-    item.textContent = it;
+    item.className = 'dd-item';
     item.tabIndex = 0;
+    item.textContent = it;
     item.style.padding = '8px 10px';
     item.style.borderRadius = '8px';
     item.style.marginBottom = '6px';
@@ -288,55 +338,41 @@ function createDropdown(x, y, items, onSelect){
     item.addEventListener('keydown', (e)=> { if(e.key==='Enter') onSelect(it); });
     list.appendChild(item);
   });
-  box.appendChild(list);
-
-  // filter
   search.addEventListener('input', ()=>{
     const q = search.value.trim().toLowerCase();
-    Array.from(list.children).forEach(c=> { c.style.display = c.textContent.toLowerCase().includes(q) ? '' : 'none'; });
+    const children = Array.from(list.children);
+    children.forEach(c => { c.style.display = c.textContent.toLowerCase().includes(q) ? '' : 'none'; });
+    const first = children.find(c => c.style.display !== 'none');
+    if(first) first.focus();
   });
-
-  // close helper
-  box.close = ()=> { if(box.parentNode) box.parentNode.removeChild(box); };
-
-  return box;
+  // focus first
+  list.querySelector('.dd-item')?.focus();
 }
 
-/* ---------- selection callback flow to "avoid distraction" ----------
-   Behavior requested by you:
-   - When user chooses pair or timeframe, UI should callback and avoid distracting flicker.
-   Implementation:
-   - When an item is chosen: show a short focus lock (dim overlay + spinner), call onSelectionChange (where you can plug a WebSocket/API),
-     then update triangles and animate smoothly. This prevents rapid random animation while the selection is processed.
-*/
-let selectionLock = null;
+/* selection callback: demo placeholder for real API or websocket */
 function onSelectionChange(payload){
-  // This is where your real callback / API call would go.
-  // Example payload: {pair:'EURUSD', timeframe:'M5'}
-  // For this clone I simulate an async feed result with a small delay.
+  // payload: {pair, timeframe}
+  // replace this with real network/ws call. We'll simulate a short delay and return up/down.
   return new Promise(resolve=>{
-    // simulate network/model latency 300 - 900ms
-    const latency = 300 + Math.random()*600;
+    const latency = 300 + Math.random()*500;
     setTimeout(()=>{
-      // simulate returned up/down percentages (you will replace with real data)
-      const a = +(Math.random()*70 + 8).toFixed(2);
-      const b = +(100 - a).toFixed(2);
-      resolve({ up:a, down:b, timestamp: new Date().toISOString() });
+      const up = +(Math.random()*70 + 10).toFixed(2);
+      const down = +(100 - up).toFixed(2);
+      resolve({up, down});
     }, latency);
   });
 }
+
+/* selection lock UI */
+let selectionLock = null;
 function lockUIDuringSelection(){
-  if(selectionLock) return; // already locked
+  if(selectionLock) return;
   const overlay = document.createElement('div');
-  overlay.style.position='absolute'; overlay.style.inset='0'; overlay.style.zIndex=190; overlay.style.display='flex'; overlay.style.alignItems='center'; overlay.style.justifyContent='center';
+  overlay.style.position='absolute'; overlay.style.inset='0'; overlay.style.zIndex=1100; overlay.style.display='flex'; overlay.style.alignItems='center'; overlay.style.justifyContent='center';
   overlay.style.backdropFilter = 'blur(4px)'; overlay.style.background = 'rgba(0,0,0,0.36)';
-  overlay.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;gap:10px;color:#fff;"><div class="spinner" style="width:48px;height:48px;border-radius:50%;border:4px solid rgba(255,255,255,0.12);border-top-color:var(--neon-green);animation:spin 0.9s linear infinite"></div><div style="color:var(--muted);font-weight:700">Updating...</div></div>';
+  overlay.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;gap:10px;color:#fff;"><div class="spinner"></div><div style="color:var(--muted);font-weight:700">Updating…</div></div>';
   document.querySelector('.main-inner').appendChild(overlay);
   selectionLock = overlay;
-  // spinner keyframes
-  if(!document.getElementById('spinStyle')){
-    const s = document.createElement('style'); s.id='spinStyle'; s.textContent='@keyframes spin{to{transform:rotate(360deg)}}'; document.head.appendChild(s);
-  }
 }
 function unlockUIAfterSelection(){
   if(!selectionLock) return;
@@ -344,66 +380,36 @@ function unlockUIAfterSelection(){
   selectionLock = null;
 }
 
-/* ---------- attach dropdown openers ---------- */
-pairSelect.addEventListener('click', (e)=>{
-  // remove existing dropdowns
+/* open dropdowns */
+function openPairsDropdown(){
   dropdowns.innerHTML = '';
-  const box = createDropdown();
-  box.style.right = (window.innerWidth < 760 ? '12px' : '22px');
-  // set items
-  const list = document.createElement('div');
+  const box = createDropdownShell();
   buildDropdownContents(box, pairs, selectedPair);
   dropdowns.appendChild(box);
-});
-
-tfSelect.addEventListener('click', (e)=>{
+}
+function openTFDropdown(){
   dropdowns.innerHTML = '';
-  const box = createDropdown();
+  const box = createDropdownShell();
   buildDropdownContents(box, timeframes, selectedTF);
   dropdowns.appendChild(box);
-});
-
-/* helper to build contents for our createDropdown (we kept structure inline earlier) */
-function buildDropdownContents(box, items, onSelect){
-  // remove previously added children (createDropdown added search + list)
-  // find search & inner list and set behavior
-  const search = box.querySelector('input');
-  const list = box.querySelector('div:nth-child(2)');
-  // already populated by createDropdown, if not, fallback:
-  if(!list || !search){
-    // fallback: create minimal list
-    box.innerHTML = '';
-    const fallback = document.createElement('div');
-    items.forEach(it=>{
-      const itEl = document.createElement('div'); itEl.textContent = it;
-      itEl.style.padding='8px'; itEl.style.cursor='pointer';
-      itEl.addEventListener('click', ()=> onSelect(it));
-      box.appendChild(itEl);
-    });
-    return;
-  }
-  // wire selection: find item nodes
-  Array.from(list.children).forEach(child => {
-    child.onclick = ()=> onSelect(child.textContent);
-  });
-  // search filter already wired in createDropdown
 }
 
-/* ---------- selected handlers: call the selection flow ---------- */
+/* attach openers */
+pairSelect.addEventListener('click', openPairsDropdown);
+tfSelect.addEventListener('click', openTFDropdown);
+
+/* selection handlers */
 function selectedPair(val){
-  // immediate UI text change (keeps user feedback)
   pairValue.textContent = val;
-  // lock UI and callback to avoid distraction
   dropdowns.innerHTML = '';
   lockUIDuringSelection();
   onSelectionChange({pair:val, timeframe: tfValue.textContent}).then(res=>{
-    // update triangles & meta info from returned res
+    // If unsubscribed, we still use values for sizing but numbers remain hidden
     setTriangles(res.up, res.down);
     metaTF.textContent = tfValue.textContent;
     unlockUIAfterSelection();
-    // if you need to notify other parts of the app, call a global hook:
     if(window.onPairTimeframeUpdate) window.onPairTimeframeUpdate({pair:val, timeframe:tfValue.textContent, up:res.up, down:res.down});
-  });
+  }).catch(()=> unlockUIAfterSelection());
 }
 function selectedTF(val){
   tfValue.textContent = val;
@@ -414,24 +420,23 @@ function selectedTF(val){
     metaTF.textContent = val;
     unlockUIAfterSelection();
     if(window.onPairTimeframeUpdate) window.onPairTimeframeUpdate({pair:pairValue.textContent, timeframe:val, up:res.up, down:res.down});
-  });
+  }).catch(()=> unlockUIAfterSelection());
 }
 
-/* ---------- basic close behavior when clicking outside dropdowns ---------- */
+/* close dropdowns on outside click / ESC */
 document.addEventListener('click', (e)=>{
-  const inside = e.target.closest('.select') || e.target.closest('#dropdowns');
+  const inside = e.target.closest('.select') || e.target.closest('#dropdowns') || e.target.closest('.dd-box');
   if(!inside) dropdowns.innerHTML = '';
 });
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') dropdowns.innerHTML = ''; });
 
-/* ---------- background algorithm canvas: full-cover numbers like screenshot ----------
-   - matrix-like columns of numbers, blurred and saturated for the neon effect
-   - uses requestAnimationFrame and reduces complexity on small screens
-*/
+/* background animation: matrix + bokeh drift */
 (function backgroundCanvas(){
   const canvas = document.getElementById('algoCanvas');
   if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let w,h, cols, colW = 14, drops = [];
+  const ctx = canvas.getContext('2d', { alpha:true });
+  let w=0,h=0, cols=0, colW=12, drops=[];
+
   const small = ()=> window.matchMedia('(max-width:560px)').matches;
 
   function resize(){
@@ -440,7 +445,8 @@ document.addEventListener('click', (e)=>{
     h = Math.max(240, Math.floor(rect.height));
     canvas.width = Math.floor(w * devicePixelRatio);
     canvas.height = Math.floor(h * devicePixelRatio);
-    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
     ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
     colW = small() ? 18 : 12;
     cols = Math.floor(w / colW);
@@ -450,81 +456,126 @@ document.addEventListener('click', (e)=>{
   window.addEventListener('resize', resize);
 
   const glyphs = '0123456789';
-  let raf; let last=performance.now();
+  let raf, last = performance.now();
+
   function frame(now){
     const dt = now - last; last = now;
-    // dark translucent fill for trails
-    ctx.fillStyle = 'rgba(1,3,6,0.28)';
+    // draw blurred, softer background with a cyan gradient wash to match screenshot color
+    ctx.fillStyle = 'rgba(2,10,20,0.25)';
     ctx.fillRect(0,0,w,h);
+
+    // faint vertical streaks to make background more lively
+    for(let i=0;i<6;i++){
+      ctx.globalAlpha = 0.02 + i*0.01;
+      ctx.fillStyle = `rgba(18,120,170,${0.02 + i*0.02})`;
+      const x = (i / 6) * w + (Math.sin(now/600 + i) * 20);
+      ctx.fillRect(x, 0, Math.max(40, w/18), h);
+    }
+    ctx.globalAlpha = 1;
+
     const step = small() ? 2 : 1;
+    ctx.textAlign = 'center';
+    ctx.font = (small()? '10px':'12px') + ' monospace';
+
     for(let i=0;i<cols;i+=step){
       const x = i*colW + (Math.random()*4 - 2);
       let y = drops[i];
-      const head = glyphs.charAt(Math.floor(Math.random()*glyphs.length));
-      // tail
-      ctx.fillStyle = 'rgba(200,230,255,0.06)';
-      ctx.font = (small()? '10px':'12px') + ' monospace';
-      ctx.textAlign = 'center';
+      // pale blurred tails
+      ctx.fillStyle = 'rgba(220,240,255,0.05)';
       for(let t=0;t<4;t++){
         ctx.fillText(glyphs.charAt(Math.floor(Math.random()*glyphs.length)), x, y - t*10);
       }
-      // head bright
-      ctx.fillStyle = 'rgba(0,255,51,0.85)';
-      ctx.fillText(head, x, y);
+      // bright head (neon green)
+      ctx.fillStyle = 'rgba(0,255,102,0.85)';
+      ctx.fillText(glyphs.charAt(Math.floor(Math.random()*glyphs.length)), x, y);
       drops[i] = y + (2 + Math.random()*8) * (small()? 0.6:1.0);
       if(drops[i] > h + 80) drops[i] = Math.random()*-150;
     }
+
     raf = requestAnimationFrame(frame);
   }
-  document.addEventListener('visibilitychange', ()=> {
+
+  document.addEventListener('visibilitychange', ()=>{
     if(document.hidden) cancelAnimationFrame(raf);
-    else { last=performance.now(); raf=requestAnimationFrame(frame); }
+    else { last = performance.now(); raf = requestAnimationFrame(frame); }
   });
+
   raf = requestAnimationFrame(frame);
+
+  // animate bokeh positions subtly for extra life
+  const b1 = document.getElementById('b1'), b2 = document.getElementById('b2'), b3 = document.getElementById('b3');
+  let t=0;
+  function bokehLoop(){
+    t += 0.008;
+    if(b1){ b1.style.left = (6 + Math.sin(t*0.9)*2) + '%'; b1.style.top = (12 + Math.cos(t*0.7)*2) + '%'; }
+    if(b2){ b2.style.right = (6 + Math.cos(t*0.6)*2) + '%'; b2.style.top = (22 + Math.sin(t*0.5)*2) + '%'; }
+    if(b3){ b3.style.left = (40 + Math.sin(t*0.4)*3) + '%'; b3.style.bottom = (18 + Math.cos(t*0.8)*2) + '%'; }
+    requestAnimationFrame(bokehLoop);
+  }
+  bokehLoop();
+
 })();
 
-/* ---------- demo: periodic updates when not selecting (but stop when user interacts) ---------- */
+/* auto updates (gentle), but if subscription locked we still update shapes so look live */
 let autoUpdate = setInterval(()=>{
-  // don't auto-update when a selection lock exists (user interaction)
   if(selectionLock) return;
-  // gentle update to make UI feel live
   const up = +(Math.random()*70 + 8).toFixed(2);
   const down = +(100 - up).toFixed(2);
   setTriangles(up, down);
-}, 6000);
+}, 5200);
 
-/* ---------- expose hook for integration (e.g., WebSocket) ----------
-   - window.onPairTimeframeUpdate will be called after selection processing completes
-   - also provide helper to feed live updates directly: window.feedLive({pair, timeframe, up, down})
-*/
+/* Premium modal behavior */
+function showPremiumModal(){
+  premiumModal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function hidePremiumModal(){
+  premiumModal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+modalLater?.addEventListener('click', ()=> { hidePremiumModal(); });
+modalSubscribe?.addEventListener('click', ()=> {
+  // Demo subscribe flow: unlock UI
+  isSubscribed = true;
+  hidePremiumModal();
+  // Immediately reveal numbers by triggering an update
+  const up = +(Math.random()*70 + 8).toFixed(2);
+  const down = +(100 - up).toFixed(2);
+  setTriangles(up, down);
+});
+
+/* Block buttons with modal if not subscribed */
+[btnReport, btnBroker, btnDownload, btnLogout].forEach(btn => {
+  btn.addEventListener('click', (e)=>{
+    if(!isSubscribed) {
+      // show premium modal with strong psychology messaging
+      showPremiumModal();
+      e.preventDefault();
+      return;
+    }
+    // if subscribed, normal behaviour (download/demo)
+    if(btn === btnDownload){
+      const csv = 'pair,timeframe,up,down\n' + pairValue.textContent + ',' + tfValue.textContent + ',' + upText.textContent + ',' + downText.textContent;
+      const blob = new Blob([csv], {type:'text/csv'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download='sheet.csv'; document.body.appendChild(a); a.click(); a.remove();
+    } else {
+      alert('Feature: ' + btn.textContent + ' (real app should implement).');
+    }
+  });
+});
+
+/* Keyboard open */
+pairSelect.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); openPairsDropdown(); }});
+tfSelect.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); openTFDropdown(); }});
+
+/* Integration hooks for backend */
 window.onPairTimeframeUpdate = window.onPairTimeframeUpdate || null;
 window.feedLive = function(msg){
   if(!msg || typeof msg.up !== 'number') return;
-  // if user currently selecting, skip
   if(selectionLock) return;
   setTriangles(msg.up, msg.down);
 };
-
-/* ---------- buttons (demo stubs) ---------- */
-document.getElementById('btnReport').addEventListener('click', ()=> alert('Open report — implement link to report'));
-document.getElementById('btnBroker').addEventListener('click', ()=> alert('Change broker — implement broker selection'));
-document.getElementById('btnDownload').addEventListener('click', ()=>{
-  const csv = 'pair,timeframe,up,down\n' + pairValue.textContent + ',' + tfValue.textContent + ',' + upText.textContent + ',' + downText.textContent;
-  const blob = new Blob([csv], {type:'text/csv'});
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download='sheet.csv'; document.body.appendChild(a); a.click(); a.remove();
-});
-document.getElementById('btnLogout').addEventListener('click', ()=> alert('Logout...'));
-
-/* ---------- accessibility: keyboard open dropdowns ---------- */
-pairSelect.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') pairSelect.click(); });
-tfSelect.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') tfSelect.click(); });
-
-/* ---------- Simulate heavier "exact replica" feel: slightly slower, steadier animations for triangles ----------
-   - ensures the triangles animate smoothly (not jittery) like the screenshot
-*/
-(function smoothLoop(){
-  // small smoothing not required, triangles set by setTriangles already animate via CSS
-})();
 
 </script>
 </body>
